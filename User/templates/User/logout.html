@@ -1,0 +1,12 @@
+{% extends "MovieReview/base.html" %}
+{% comment %} {% load crispy_forms_tags%} {% endcomment %}
+{% block content %}
+<div class="container">
+    <div class='container'>
+        <h2>You have successfully logged out!</h2>
+        <div class="border-top pt-3">
+            <a class="ml-2" href="{% url 'login' %}">Login Again?</a>
+        </div>
+    </div>
+
+{% endblock content %}

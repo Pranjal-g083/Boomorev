@@ -1,0 +1,23 @@
+{% extends "MovieReview/base.html" %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="card" style="background-color: #20c997; margin-top: 10px; margin-left:10px;" >
+                <h6 style="padding-left: 60px;">Authored By: <a class="link-warning" href="#">Name</a></h6>
+
+                <img src="https://i.pinimg.com/736x/91/e2/93/91e29340445c5ebf057792abb6b1b9eb.jpg" class="card-img">
+                <div class="card-body">
+                    <h1><a href="#" class="link-light">Your Name</a></h1>
+                    <p>20 May 2022</p>
+                    <a class="link-primary" href="#">Read more</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
