@@ -1,0 +1,32 @@
+{% extends "MovieReview/0.html" %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block content %}
+<br>
+<br>
+<div class="row movie-cards">
+    <div class="col-md-3 mov-col">
+        <div class="card">
+            <a href="{% url 'movie-review-info' %}">
+                <img class="image-cap-top" src="https://i.pinimg.com/736x/91/e2/93/91e29340445c5ebf057792abb6b1b9eb.jpg" alt="Your Name">
+            </a>
+        </div>
+        <div class="support-text"style="margin: 5px;">
+            <span class="title pull-left"> Your Name </span>
+            <span class="rating pull-right"> <i class="fa fa-star yellow"></i> 9.0/10</span>
+        </div>
+    </div>
+    <div class="col-md-3 mov-col">
+        <div class="card">
+            <a href="#">
+                <img class="image-cap-top" src="ux/captain-america-civil-war-movie-poster-1920x1080.jpg" alt="aladin">
+            </a>
+        </div>
+        <div class="support-text" style="margin: 5px;">
+            <span class="title pull-left"> Captain America: Civil War </span>
+            <span class="rating pull-right"> <i class="fa fa-star yellow"></i> 5.5/10</span>
+        </div>
+    </div>
+</div>
+{%endblock%}

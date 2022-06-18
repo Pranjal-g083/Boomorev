@@ -5,7 +5,7 @@ from .models import Movie, Review
 # Create your views here.
 
 def home(request):
-    return render(request, 'moviereview/home.html')
+    return render(request, 'moviereview/2.html')
 
 def info(request):
     return render(request, 'moviereview/info.html')
