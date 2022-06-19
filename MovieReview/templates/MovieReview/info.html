@@ -1,4 +1,4 @@
-{% extends "MovieReview/0.html" %}
+{% extends "MovieReview/base.html" %}
 {% block title %}
 {{title}}
 {% endblock %}
@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-3">
-            <div class="card" style="background-color: #6610f2; margin-top: 10px; margin-left:10px;" >
+            <div class="card" style="background-color: #8116de; margin-top: 10px; margin-left:10px;" >
                 <img src="https://i.pinimg.com/236x/a0/01/07/a001075a4425d7a63b3ddb5f548293d0.jpg" class="card-img">
                 <div class="card-body">
                     <h1><a href="#" class="link-light">Your Name</a></h1>
@@ -44,53 +44,54 @@
                 <span class="fa fa-star star5"></span>
             </div>
             <div class="row">
-                <div class="row col-md-9"> 
-                    <div class="col-md-2 mt-2" >
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                        <br>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                        <br>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                        <br>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                        <br>
-                            <span class="fa fa-star checked"></span>
-                        <br>
-                    </div>
-                <div class="col-md-5 "> 
-                    <div class="progress mt-2" data-toggle="tooltip" data-placement="top" title="50" style="height: 20px">
-                        <div class="progress-bar progress-bar-animated" role="progressbar" style="width: 50%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
+                <div class="row col-md-6"> 
                     
-                    <div class="progress mt-1" data-toggle="tooltip" data-placement="top" title="30" style="height: 20px">
-                        <div class="progress-bar bg-success progress-bar-animated"  role="progressbar" style="width: 30%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                            {% comment %} 30 {% endcomment %}
+                    <div class="col-md-3 mt-2" >
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                        <br>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                        <br>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                        <br>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                        <br>
+                            <span class="fa fa-star checked"></span>
+                        <br>
+                    </div>
+                    <div class="col-md-9 "> 
+                        <div class="progress mt-2" data-toggle="tooltip" data-placement="top" title="50" style="height: 20px">
+                            <div class="progress-bar progress-bar-animated" role="progressbar" style="width: 50%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        
+                        <div class="progress mt-1" data-toggle="tooltip" data-placement="top" title="30" style="height: 20px">
+                            <div class="progress-bar bg-success progress-bar-animated"  role="progressbar" style="width: 30%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                {% comment %} 30 {% endcomment %}
+                            </div>
+                        </div>
+                        <div class="progress mt-1" data-toggle="tooltip" data-placement="top" title="5" style="height: 20px">
+                            <div class="progress-bar bg-info progress-bar-animated" role="progressbar" style="width: 5%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="progress mt-1" data-toggle="tooltip" data-placement="top" title="2" style="height: 20px">
+                            <div class="progress-bar bg-warning progress-bar-animated" role="progressbar" style="width: 2%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="progress mt-1" data-toggle="tooltip" data-placement="top" title="13" style="height: 20px">
+                            <div class="progress-bar bg-danger progress-bar-animated" role="progressbar" style="width: 13%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
-                    <div class="progress mt-1" data-toggle="tooltip" data-placement="top" title="5" style="height: 20px">
-                        <div class="progress-bar bg-info progress-bar-animated" role="progressbar" style="width: 5%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <div class="progress mt-1" data-toggle="tooltip" data-placement="top" title="2" style="height: 20px">
-                        <div class="progress-bar bg-warning progress-bar-animated" role="progressbar" style="width: 2%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <div class="progress mt-1" data-toggle="tooltip" data-placement="top" title="13" style="height: 20px">
-                        <div class="progress-bar bg-danger progress-bar-animated" role="progressbar" style="width: 13%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
                 </div>
-            </div>
                 
             </div>
-        {% comment %} </div> {% endcomment %}
+        
     </div>
 
     
