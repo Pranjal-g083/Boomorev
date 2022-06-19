@@ -1,4 +1,4 @@
-{% extends "MovieReview/base.html" %}
+{% extends "MovieReview/0.html" %}
 {% block title %}
 {{title}}
 {% endblock %}
@@ -27,23 +27,73 @@
         </div>
 
     </div>
-    <p><strong>Your Name</strong> (Japanese: 君の名は。, Hepburn: Kimi no Na wa.) is a 2016 Japanese animated romantic fantasy film produced by CoMix Wave Films and released by Toho. It depicts a high school boy in Tokyo and a high school girl in the Japanese countryside who suddenly and inexplicably begin to swap bodies.</p>
-    <p>The film was commissioned in 2014, written and directed by Makoto Shinkai. It features the voices of Ryunosuke Kamiki and Mone Kamishiraishi, with animation direction by Masashi Ando, character design by Masayoshi Tanaka, and its orchestral score and soundtrack composed by Radwimps. A light novel of the same name, also written by Shinkai, was published a month prior to the film's premiere.</p>
-    <p>Your Name premiered at the 2016 Anime Expo in Los Angeles on July 3, 2016, and was theatrically released in Japan on August 26, 2016, and in the United States on April 7, 2017. The film was critically acclaimed, with praise for the animation, music, and emotional weight. The film grossed over ¥41.44 billion (US$380.15 million) worldwide, breaking numerous box office records, including becoming the third highest-grossing anime film of all time, unadjusted for inflation.</p>
-    <p>The film won Best Animated Feature at the 2016 Los Angeles Film Critics Association Awards, 49th Sitges Film Festival, and as the 71st Mainichi Film Awards, and nominated for Best Animation of the Year at the 40th Japan Academy Prize. As of 2021, a live-action American remake by Paramount Pictures is in development.</p>
-    <div class="row">
-        <div class="col-sm-8" >
-            <div class="p-3 " style="background-color: #fd7e14"><H3>Reviews</H3></div>
-
-        </div>
-        <div class="container col-sm-4" style="position: relative">
-        <h3>Add review here</h3>
-
-
-
-
+        <p><strong>Your Name</strong> (Japanese: 君の名は。, Hepburn: Kimi no Na wa.) is a 2016 Japanese animated romantic fantasy film produced by CoMix Wave Films and released by Toho. It depicts a high school boy in Tokyo and a high school girl in the Japanese countryside who suddenly and inexplicably begin to swap bodies.</p>
+        <p>The film was commissioned in 2014, written and directed by Makoto Shinkai. It features the voices of Ryunosuke Kamiki and Mone Kamishiraishi, with animation direction by Masashi Ando, character design by Masayoshi Tanaka, and its orchestral score and soundtrack composed by Radwimps. A light novel of the same name, also written by Shinkai, was published a month prior to the film's premiere.</p>
+        <p>Your Name premiered at the 2016 Anime Expo in Los Angeles on July 3, 2016, and was theatrically released in Japan on August 26, 2016, and in the United States on April 7, 2017. The film was critically acclaimed, with praise for the animation, music, and emotional weight. The film grossed over ¥41.44 billion (US$380.15 million) worldwide, breaking numerous box office records, including becoming the third highest-grossing anime film of all time, unadjusted for inflation.</p>
+        <p>The film won Best Animated Feature at the 2016 Los Angeles Film Critics Association Awards, 49th Sitges Film Festival, and as the 71st Mainichi Film Awards, and nominated for Best Animation of the Year at the 40th Japan Academy Prize. As of 2021, a live-action American remake by Paramount Pictures is in development.</p>
+        {% comment %} <div class="row"> {% endcomment %}
+            <div  style="background-color: orange">
+                <div><h3>Reviews</h3></div>
+                
+            </div>
+            <div>
+                <span class="fa fa-star star1 checked"></span>
+                <span class="fa fa-star star2 checked"></span>
+                <span class="fa fa-star star3 checked"></span>
+                <span class="fa fa-star star4"></span>
+                <span class="fa fa-star star5"></span>
+            </div>
+            <div class="row">
+                <div class="row col-md-9"> 
+                    <div class="col-md-2 mt-2" >
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                        <br>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                        <br>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                        <br>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                        <br>
+                            <span class="fa fa-star checked"></span>
+                        <br>
+                    </div>
+                <div class="col-md-5 "> 
+                    <div class="progress mt-2" data-toggle="tooltip" data-placement="top" title="50" style="height: 20px">
+                        <div class="progress-bar progress-bar-animated" role="progressbar" style="width: 50%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    
+                    <div class="progress mt-1" data-toggle="tooltip" data-placement="top" title="30" style="height: 20px">
+                        <div class="progress-bar bg-success progress-bar-animated"  role="progressbar" style="width: 30%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                            {% comment %} 30 {% endcomment %}
+                        </div>
+                    </div>
+                    <div class="progress mt-1" data-toggle="tooltip" data-placement="top" title="5" style="height: 20px">
+                        <div class="progress-bar bg-info progress-bar-animated" role="progressbar" style="width: 5%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress mt-1" data-toggle="tooltip" data-placement="top" title="2" style="height: 20px">
+                        <div class="progress-bar bg-warning progress-bar-animated" role="progressbar" style="width: 2%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress mt-1" data-toggle="tooltip" data-placement="top" title="13" style="height: 20px">
+                        <div class="progress-bar bg-danger progress-bar-animated" role="progressbar" style="width: 13%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+                
+            </div>
+        {% comment %} </div> {% endcomment %}
     </div>
-    </div>
+
+    
 
 </div>
 {%endblock%}
