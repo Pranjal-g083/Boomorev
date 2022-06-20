@@ -5,143 +5,105 @@
 {% block content %}
 
 <div class="container-fluid profile">
-    <div class = "accordion">
-    <div class="row categories ">
-        <h1 class="name col-md-3">{{ title }}</h1>
-        <ul class="list-unstyled col-md-9">
-            <li>
-                <a class="all-cat active" data-toggle="collapse" href="#details">Details</a>
-            </li>
-            <li>
-                <a class="all-cat" data-toggle="collapse" href="#trailer">Trailer</a>
-            </li>
-            <li>
-                <a class="all-cat" href="#">Recommendations</a>
-            </li>
-        </ul>
-    </div>
-
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card">
-                <img src="https://image.tmdb.org/t/p/original/{{ poster_path }}" alt="{{ title }}">
-            </div>
+    <div class="accordion" id="tabs">
+        <div class="row categories ">
+            <h1 class="name col-md-3">{{ movie.title }}</h1>
+            <ul class="list-unstyled col-md-9">
+                <li>
+                    <a class="all-cat active" data-toggle="collapse" href="#details" id="heading_details"
+                        data-target="#details" aria-expanded="false" aria-controls="details">Details</a>
+                </li>
+                <li>
+                    <a class="all-cat" data-toggle="collapse" href="#trailer" id="heading_trailer"
+                        data-target="#trailer" aria-expanded="false" aria-controls="trailer">Trailer</a>
+                </li>
+                <li>
+                    <a class="all-cat" data-toggle="collapse" href="Recommendation" id="heading_recommendation"
+                        data-target="#recommendation" aria-expanded="false"
+                        aria-controls="recommendation">Recommendations</a>
+                </li>
+            </ul>
         </div>
-        <div class=" col-md-7 passage">
-            <div id="details">
-                <p class="syn">
-                    {{ overview }}
-                </p>
-                <div class="row">
-                    <ul class="list-unstyled ">
-                        <li class="rep">
-                            <h5 class="">Imdb Rating</h5>
-                            <p><i class="fa fa-star yellow"></i> {{vote_average}}/10</p>
-                        </li>
-                        <li class="rep">
-                            <h5 class="">Genre</h5>
-                            <p>
-                                {% for genre in genres %}
-                                {{ genre.name }} /
-                                {% endfor %}
-                            </p>
-                        </li>
-                    </ul>
+
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <div class="card">
+                    <img class="image-cap-top" src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}"
+                        alt="{{ movie.title }}">
                 </div>
+                <br>
             </div>
-            <div class="container-fluid col-md-12" id="trailer">
-                {% for trailer in videos.results %}
-                {% if trailer.official and trailer.type == 'Trailer' %}
-                <div class="container">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{trailer.key}}"
-                            frameborder="10"
-                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
+            <div class=" col-md-7 ">
+                <div id="trailer" class="collapse" aria-labelledby="trailer" data-parent="#tabs">
+                    <div class="container-fluid">
+                        <div class="container">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item"
+                                    src="{{ trailer }}" frameborder="0"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+                <div id="details" class="collapse show card" aria-labelledby="details" data-parent="#tabs">
+                    <div class="container">
+                        <br>
+                        <p>
+                            {{ movie.overview }}
+                        </p>
+                        <ul class="list-unstyled ">
+                            <li class="rep">
+                                <h5 class="">Imdb Rating</h5>
+                                <p><i class="fa fa-star yellow"></i> {{movie.vote_average}}/10</p>
+                            </li>
+                            <li class="rep">
+                                <h5 class="">Genre</h5>
+                                <p>
+                                    {% for genre in movie.genres %}
+                                    {{ genre.name }} /
+                                    {% endfor %}
+                                </p>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                {%endif%}
-                {%endfor%}
-            </div>
-        </div>
-    </div>
-</div>
-<div class="accordion" id="accordionExample">
-    <div class="row">
-        <div class="card-header col-md-4" id="headingOne">
-            <h2 class="mb-0">
-                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                    aria-expanded="true" aria-controls="collapseOne">
-                    Collapsible Group Item #1
-                </button>
-            </h2>
-        </div>
-        <div class="card-header col-md-4" id="headingThree">
-            <h2 class="mb-0">
-                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree"
-                    aria-expanded="false" aria-controls="collapseThree">
-                    Collapsible Group Item #3
-                </button>
-            </h2>
-        </div>
-        <div class="card-header col-md-4" id="headingTwo">
-            <h2 class="mb-0">
-                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="false" aria-controls="collapseTwo">
-                    Collapsible Group Item #2
-                </button>
-            </h2>
-        </div>
+                <div class="card">
+                    <div id="recommendation" class="collapse" aria-labelledby="recommendation" data-parent="#tabs">
+                        <div class="row movie-cards">
+                            {% for recommendation in recommendations.results %}
+                            {% if forloop.counter < 7 %} 
+                            <div class="col-md-4 mov-col">
+                                <div class="card">
+                                    <a href="{% url 'movie-review-info' recommendation.id %}">
+                                        <img class="image-cap-top"
+                                            src="https://image.tmdb.org/t/p/original/{{ recommendation.backdrop_path }}"
+                                            alt="{{ recommendation.title }}">
+                                    </a>
+                                </div>
+                                <div class="support-text" style="margin: 5px;">
+                                    <span class="pull-left"> {{ recommendation.title }} </span>
+                                </div>
+                            </div>
+                            {% if forloop.counter == 3 %}
+                                </div>
+                                <div class="row movie-cards">
+                            {% endif %}
 
-        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-            <div class="card-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                3
-                wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-                laborum
-                eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee
-                nulla
-                assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
-                nesciunt
-                sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
-                farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-                labore sustainable VHS.
-            </div>
-        </div>
-
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-            <div class="card-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                3
-                wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-                laborum
-                eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee
-                nulla
-                assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
-                nesciunt
-                sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
-                farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-                labore sustainable VHS.
-            </div>
-        </div>
-
-        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-            <div class="card-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                3
-                wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-                laborum
-                eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee
-                nulla
-                assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
-                nesciunt
-                sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
-                farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-                labore sustainable VHS.
+                    
+                            {% endif %}
+                            {% endfor %}
+                        </div>    
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 </div>
+<br>
+<br>
 
 {% endblock %}

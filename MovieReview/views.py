@@ -30,4 +30,16 @@ def info(request,id):
     response = urlopen(url)
     movie = json.load(response)
 
-    return render(request, 'MovieReview/info.html',movie)
+    url = "https://api.themoviedb.org/3/movie/" + \
+        str(id) + \
+        "/recommendations?api_key=8511985aaf3fd8b644f3956666ae4679&language=en-US"
+    response = urlopen(url)
+    recommendations = json.load(response)
+    trailer = []
+    for vid in movie["videos"]["results"]:
+        if vid["type"] == "Trailer":
+            if vid["site"] == "YouTube":
+                if vid["official"]:
+                    trailer.append("https://www.youtube.com/embed/" + vid["key"])
+    param = { "movie": movie, "recommendations": recommendations , "trailer": trailer[0]}
+    return render(request, 'MovieReview/info.html',param)
