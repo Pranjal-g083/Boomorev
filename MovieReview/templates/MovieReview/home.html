@@ -9,22 +9,20 @@
     <div class="row categories">
         <ul class="list-unstyled">
             <li>
-                <a class="all-cat active" href="#" style="color: black;">All</a>
+                <a class="all-cat badge badge-pill badge-light" href="{% url 'movie-review-home' %}" style="color:black;" >All</a>
             </li>
+            
+            {% for genre in genres.genres %}
             <li>
-                <a class="all-cat" href="#">Drama</a>
+                <a class="all-cat badge badge-pill badge-light" href="{% url 'movie-review-genre' genre.id %}">{{genre.name}}</a>
+                
             </li>
-            <li>
-                <a class="all-cat" href="#">Comedy</a>
-            </li>
-            <li>
-                <a class="all-cat" href="#">Sci-Fi</a>
-            </li>
+            {% endfor %}
         </ul>
     </div>
 </div>
 <div class="row movie-cards">
-    {% for movie in results %}
+    {% for movie in result.results %}
     <div class="col-md-3 mov-col">
         <div class="card">
             <a href="{% url 'movie-review-info' movie.id %}" >
