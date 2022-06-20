@@ -41,5 +41,6 @@ def info(request,id):
             if vid["site"] == "YouTube":
                 if vid["official"]:
                     trailer.append("https://www.youtube.com/embed/" + vid["key"])
+    trailer.append("https://www.youtube.com/embed/no_video_found")
     param = { "movie": movie, "recommendations": recommendations , "trailer": trailer[0]}
     return render(request, 'MovieReview/info.html',param)
