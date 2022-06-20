@@ -24,10 +24,10 @@
 </div>
 
 <div class="row movie-cards">
-    {% for movie in results %}
+    {% for movie in movies %}
     <div class="col-md-3 mov-col">
         <div class="card">
-            <a href="{% url 'movie-review-info' %}">
+            <a href="{% url 'movie-review-info' movie.id %}">
                 <img class="image-cap-top" src="https://image.tmdb.org/t/p/original/{{ movie.backdrop_path }}"
                     alt="{{ movie.title }}">
             </a>

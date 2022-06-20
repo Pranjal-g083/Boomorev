@@ -39,7 +39,9 @@
                     <button id="sch" class="btn btn-primary fa fa-search" type="submit"></button>
                 </div>
             </div>
-            <a class="navbar-brand" href="{% url 'movie-review-home'%}"><h1>MOVIE REVIEWS</h1></a>
+            <a class="navbar-brand" href="{% url 'movie-review-home'%}">
+                <h1>MOVIE REVIEWS</h1>
+            </a>
             <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
                 <li class="nav-item">
@@ -73,36 +75,10 @@
     </main>
 
     <footer class="bg-primary-gradient">
-        <div class="container py-4 py-lg-5">
-            <div class="row justify-content-center">
-                <div class="col-sm-12 col-md-3 text-center text-lg-start d-flex flex-column item">
-                    <h3 class="fs-6 fw-bold">Services</h3>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Web design</a></li>
-                        <li><a href="#">Development</a></li>
-                        <li><a href="#">Hosting</a></li>
-                    </ul>
-                </div>
-                {% comment %} <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column item">
-                    <h3 class="fs-6 fw-bold">About</h3>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Company</a></li>
-                        <li><a href="#">Team</a></li>
-                        <li><a href="#">Legacy</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column item">
-                    <h3 class="fs-6 fw-bold">Careers</h3>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Job openings</a></li>
-                        <li><a href="#">Employee success</a></li>
-                        <li><a href="#">Benefits</a></li>
-                    </ul>
-                </div> {% endcomment %}
-            </div>
-            <hr>
+        <hr>
+        <div class="container-fluid">
             <div class="text-muted d-flex justify-content-between align-items-center pt-3">
-                <p class="mb-0">Copyright © 2022 Brand</p>
+                <p class="mb-0">Copyright © 2022 Movie Reviews</p>
                 <ul class="list-inline mb-0">
                     <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
                             fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook">
