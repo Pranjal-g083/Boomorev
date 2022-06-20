@@ -3,9 +3,19 @@ body {
     font-family: 'Raleway';
 }
 
+.center
+{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 3px;
+}
 
 .nav-link, .nav-link:hover {
-    color: white;
+    color: black;
     font-weight: bold;
 }
 
