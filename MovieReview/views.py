@@ -29,8 +29,12 @@ def home(request):
     return render(request, 'MovieReview/home.html', param)
 
 
-def genre(request, genre_id):
+def genre(request, genre_name):
     context = []
+    genre_id = 0
+    for genre in genre_list["genres"]:
+        if genre["name"] == genre_name:
+            genre_id = genre["id"] 
 
     url = "https://api.themoviedb.org/3/discover/movie?api_key=" + ApiKey + \
         "&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&with_genres=" + \

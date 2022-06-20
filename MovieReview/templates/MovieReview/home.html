@@ -19,7 +19,7 @@
                 {% if current_genre == category.id %}
                 <a class="all-cat active" href="{% url 'movie-genre-home' category.id %}" style="color: black;">{{ category.name }}</a>
                 {% else %}
-                <a class="all-cat" href="{% url 'movie-genre-home' category.id %}">{{ category.name }}</a>
+                <a class="all-cat" href="{% url 'movie-genre-home' category.name %}">{{ category.name }}</a>
                 {% endif %}
             </li>
             {% endfor %}
