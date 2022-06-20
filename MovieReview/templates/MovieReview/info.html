@@ -23,8 +23,7 @@
             </div>
         </div>
 
-        <div class="col-sm-9">
-            <h2>Trailer:</h2>
+        <div class="col-sm-9 mt-3">
             {% for trailer in result.videos.results %}
                 {% if trailer.official and trailer.type == 'Trailer'%}
                     <iframe width="832" height="468" src="https://www.youtube.com/embed/{{trailer.key}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -38,7 +37,7 @@
 
     </div>
         {% comment %} <div class="row"> {% endcomment %}
-            <div  style="background-color: orange;" class="mt-3">
+            <div  style="background-color: gold; text-align: center;" class="mt-3">
                 <div><h3>Reviews</h3></div>
                 
             </div>
