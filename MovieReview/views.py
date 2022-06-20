@@ -4,16 +4,17 @@ from django.http import HttpResponse
 from .models import Movie, Review
 # Create your views here.
 import json
-context = json.load(open('./movie.json','r',encoding="utf8"))
+from urllib.request import urlopen
+url="https://api.themoviedb.org/3/movie/popular?api_key=8511985aaf3fd8b644f3956666ae4679&language=en-US&page=1&append_to_response=videos";
+response = urlopen(url);
+context= json.load(response);
+# context = json.load(open('./movie.json','r',encoding="utf8"))
 context_2= json.load(open('./genre.json','r',encoding="utf8"))
 # print( context);
 def home(request):
     return render(request, 'moviereview/home.html',context)
 
 def info(request,id):
-    for(result) in context['results']:
-        if result['id']==id:
-            return render(request, 'moviereview/info.html',{'result':result,'genres':context_2['genres']})
-    # return render(request, 'moviereview/info.html')
-    else:
-        return HttpResponse('<h1>Not Found</h1>');
+    response_1= urlopen(f'https://api.themoviedb.org/3/movie/{id}?api_key=8511985aaf3fd8b644f3956666ae4679&language=en-US&append_to_response=videos');
+    context_3= json.load(response_1);
+    return render(request, 'moviereview/info.html',{'result':context_3})
