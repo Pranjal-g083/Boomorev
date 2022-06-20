@@ -8,17 +8,21 @@
     <div class="row categories">
         <ul class="list-unstyled">
             <li>
-                <a class="all-cat active" href="#" style="color: black;">All</a>
+                {% if current_genre %}
+                <a class="all-cat" href="{% url 'movie-review-home' %}" >All</a>
+                {% else %}
+                <a class="all-cat active" href="{% url 'movie-review-home' %}"" style="color: black;" >All</a>
+                {% endif %}
             </li>
+            {% for category in genres.genres %}
             <li>
-                <a class="all-cat" href="#">Drama</a>
+                {% if current_genre == category.id %}
+                <a class="all-cat active" href="{% url 'movie-genre-home' category.id %}" style="color: black;">{{ category.name }}</a>
+                {% else %}
+                <a class="all-cat" href="{% url 'movie-genre-home' category.id %}">{{ category.name }}</a>
+                {% endif %}
             </li>
-            <li>
-                <a class="all-cat" href="#">Comedy</a>
-            </li>
-            <li>
-                <a class="all-cat" href="#">Sci-Fi</a>
-            </li>
+            {% endfor %}
         </ul>
     </div>
 </div>
