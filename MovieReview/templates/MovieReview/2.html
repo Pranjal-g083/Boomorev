@@ -5,31 +5,63 @@
 {% block content %}
 <br>
 <br>
+<div class="container-fluid movies">
+    <div class="row categories">
+        <ul class="list-unstyled">
+            <li>
+                <a class="all-cat active" href="#" style="color: black;">All</a>
+            </li>
+            <li>
+                <a class="all-cat" href="#">Drama</a>
+            </li>
+            <li>
+                <a class="all-cat" href="#">Comedy</a>
+            </li>
+            <li>
+                <a class="all-cat" href="#">Sci-Fi</a>
+            </li>
+        </ul>
+    </div>
+</div>
 <div class="row movie-cards">
-    <div class="col-md-2 mov-col">
+    {% for movie in results %}
+    <div class="col-md-3 mov-col">
         <div class="card">
             <a href="{% url 'movie-review-info' %}">
-                <img class="image-cap-top" src="https://i.pinimg.com/236x/a0/01/07/a001075a4425d7a63b3ddb5f548293d0.jpg" alt="Your Name"style="height:200px;">
-            </a>
-        </div>
-        <div class="support-text"style="margin: 5px;">
-            <span class="title pull-left"> Your Name </span>
-            <span class="rating pull-right"> <i class="fa fa-star yellow"></i> 9.0/10</span>
-        </div>
-    </div>
-    <div class="col-md-2 mov-col">
-        <div class="card">
-            <a href="#">
-                <img class="image-cap-top " 
-                src="https://static.wikia.nocookie.net/marvelcinematicuniverse/images/5/5c/Civil_War_Final_Poster.jpg/revision/latest/scale-to-width-down/675?cb=20160310172110" 
-                alt="aladin" style="height: 200px;">
+                <img class="image-cap-top" src="https://image.tmdb.org/t/p/original/{{ movie.backdrop_path }}"
+                    alt="{{ movie.title }}">
             </a>
         </div>
         <div class="support-text" style="margin: 5px;">
-            <span class="title pull-left"> Captain America: Civil War </span>
-            <span class="rating pull-right"> <i class="fa fa-star yellow"></i> 5.5/10</span>
+            <span class="title pull-left"> {{ movie.title }} </span>
+            <span class="rating pull-right"> <i class="fa fa-star yellow"></i> {{ movie.vote_average }}</span>
         </div>
     </div>
-    
+    {% if forloop.counter|divisibleby:"4" %}
+    </div>
+    <div class="row movie-cards">
+    {% endif %}
+    {% endfor %}
 </div>
+{% if is_paginated %}
+
+{% if page_obj.has_previous %}
+<a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+{% endif %}
+
+{% for num in page_obj.paginator.page_range %}
+{% if page_obj.number == num %}
+<a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+{% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a class="btn btn-outline-info mb-4"
+    href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+
+    {% endif %}
 {%endblock%}
