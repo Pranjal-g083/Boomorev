@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-sm-3">
             <div class="card" style="background-color: #8116de; margin-top: 10px; margin-left:10px;" >
-                <img src="https://image.tmdb.org/t/p/original/{{result.poster_path}}" class="card-img">
+                <img src="https://image.tmdb.org/t/p/original/{{result.poster_path}}" class="card-img" style="border-radius:10px">
                 <div class="card-body">
                     <h1>{{ result.title }}</h1>
                     <p>{{ result.release_date}}</p>
@@ -32,12 +32,13 @@
                 {%endif%} 
             {%endfor%}     
             {{ "-->" }}
+        <p> {{ result.overview }}</p>
+
         </div>
 
     </div>
-        <p> {{ result.overview }}</p>
         {% comment %} <div class="row"> {% endcomment %}
-            <div  style="background-color: orange">
+            <div  style="background-color: orange;" class="mt-3">
                 <div><h3>Reviews</h3></div>
                 
             </div>
@@ -98,8 +99,31 @@
             </div>
         
     </div>
+    <div class="container">
+        <h2 class="mt-5" style="background-color: silver; text-align: center;"> Recommendations </h2>
+            <div class="row movie-cards">
+                {% for movie in recommendations %}
+                <div class="col-md-3 mov-col">
+                    <div class="card">
+                        <a href="{% url 'movie-review-info' movie.id %}" >
+                            <img class="image-cap-top" src="https://image.tmdb.org/t/p/original/{{ movie.backdrop_path }}"
+                                alt="{{ movie.title }}">
+                        </a>
+                    </div>
+                    <div class="support-text" style="margin: 5px;">
+                        <span class="title pull-left"> {{ movie.title }} </span>
+                        <span class="rating pull-right"> <i class="fa fa-star yellow" style="font-size: 15px"></i> {{ movie.vote_average }}</span>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:"8" %}
 
-    
+                {{ "<!--" }}
+                    {%endif%} 
+                {%endfor%}     
+                {{ "-->" }}
+            {% comment %} <p> {{ result.overview }}</p> {% endcomment %}
+            </div>
+    </div>
 
 </div>
 {%endblock%}

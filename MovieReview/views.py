@@ -16,5 +16,7 @@ def home(request):
 
 def info(request,id):
     response_1= urlopen(f'https://api.themoviedb.org/3/movie/{id}?api_key=8511985aaf3fd8b644f3956666ae4679&language=en-US&append_to_response=videos');
+    response_2=urlopen(f'https://api.themoviedb.org/3/movie/{id}/recommendations?api_key=8511985aaf3fd8b644f3956666ae4679&language=en-US&page=1')
     context_3= json.load(response_1);
-    return render(request, 'moviereview/info.html',{'result':context_3})
+    recommendations= json.load(response_2);
+    return render(request, 'moviereview/info.html',{'result':context_3, 'recommendations':recommendations["results"]})
