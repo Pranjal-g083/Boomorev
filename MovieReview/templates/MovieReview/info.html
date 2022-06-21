@@ -1,7 +1,4 @@
 {% extends "MovieReview/base.html" %}
-{% block title %}
-{{title}}
-{% endblock %}
 {% block content %}
 
 <div class="container-fluid profile">
@@ -62,9 +59,17 @@
                                 <h5 class="">Genre</h5>
                                 <p>
                                     {% for genre in movie.genres %}
-                                    {{ genre.name }} /
+                                    <a href="{% url 'movie-genre-home' genre.name %}" style="color: black;">
+                                        {{ genre.name }}</a> /
                                     {% endfor %}
                                 </p>
+                            </li>
+                            <li class="rep">
+                                <h5 class="">Release Date</h5>
+                                <p id="release_date">{{ movie.release_date }}</p>
+                                <script>
+                                    document.getElementById("release_date").innerHTML = new Date(document.getElementById("release_date").innerHTML).toLocaleDateString('en-us', { year: "numeric", month: "short", day: "numeric" });
+                                </script>
                             </li>
                         </ul>
                     </div>

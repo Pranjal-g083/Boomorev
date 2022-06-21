@@ -8,7 +8,9 @@
 
     <!-- Bootstrap css and other css files-->
     <link href='https://fonts.googleapis.com/css?family=Karla|Raleway' rel='stylesheet' type='text/css'>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
@@ -17,9 +19,9 @@
 
     <!-- Title of the page, if passed otherwise default is Movie Reviews -->
     {% if title %}
-    <title> Movie Reviews - {{ title }} </title>
+    <title> MovRev: {{ title }} </title>
     {% else %}
-    <title>Movie Reviews</title>
+    <title>MovRev</title>
     {% endif %}
 
 </head>
@@ -40,9 +42,12 @@
                 </div>
             </div>
             <a class="navbar-brand" href="{% url 'movie-review-home'%}">
-                <h1>MOVIE REVIEWS</h1>
+                <h2 style="font-family: Pacifico, cursive;">MovRev</h2>
             </a>
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'movie-review-home' %}"><i class="fa fa-home"></i></a>
+                </li>
                 {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout' %}">Logout</a>
@@ -78,7 +83,7 @@
         <hr>
         <div class="container-fluid">
             <div class="text-muted d-flex justify-content-between align-items-center pt-3">
-                <p class="mb-0">Copyright © 2022 Movie Reviews</p>
+                <p class="mb-0">Copyright © 2022 MovRev</p>
                 <ul class="list-inline mb-0">
                     <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
                             fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook">

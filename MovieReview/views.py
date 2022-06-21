@@ -31,14 +31,15 @@ def home(request):
 
 def genre(request, genre_name):
     context = []
-    genre_id = 0
+    cur_gen={"name": genre_name}
     for genre in genre_list["genres"]:
         if genre["name"] == genre_name:
-            genre_id = genre["id"] 
+            cur_gen["id"] = genre["id"]
+            
 
     url = "https://api.themoviedb.org/3/discover/movie?api_key=" + ApiKey + \
         "&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&with_genres=" + \
-        str(genre_id)+"&with_watch_monetization_types=flatrate"
+        str(cur_gen["id"])+"&with_watch_monetization_types=flatrate"
     response = urlopen(url)
     movies = json.load(response)
 
@@ -49,8 +50,8 @@ def genre(request, genre_name):
         response = urlopen(url1)
         data = json.load(response)
         context.append(data)
-    param = {"movies": context, "genres": genre_list, "current_genre": genre_id}
-    return render(request, 'MovieReview/home.html', param)
+    param = {"movies": context, "genres": genre_list, "current_genre": cur_gen, "title": genre_name}
+    return render(request, 'MovieReview/home.html', param) 
 
 
 def info(request, id):
@@ -72,7 +73,22 @@ def info(request, id):
                 if vid["official"]:
                     trailer.append(
                         "https://www.youtube.com/embed/" + vid["key"])
+    for vid in movie["videos"]["results"]:
+        if vid["type"] == "Teaser":
+            if vid["site"] == "YouTube":
+                if vid["official"]:
+                    trailer.append(
+                        "https://www.youtube.com/embed/" + vid["key"])
+    for vid in movie["videos"]["results"]:
+        trailer.append("https://www.youtube.com/embed/" + vid["key"])
     trailer.append("https://www.youtube.com/embed/no_video_found")
+    title = movie["title"]
     param = {"movie": movie, "recommendations": recommendations,
-             "trailer": trailer[0]}
+             "trailer": trailer[0], "title": title}
     return render(request, 'MovieReview/info.html', param)
+
+def trending(request):
+    url = "https://api.themoviedb.org/3/trending/movie/week?api_key=" + ApiKey 
+    response = urlopen(url)
+    movies = json.load(response)
+    return render(request, 'MovieReview/trending.html', movies)    

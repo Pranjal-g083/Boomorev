@@ -1,7 +1,4 @@
 {% extends "MovieReview/base.html" %}
-{% block title %}
-{{title}}
-{% endblock %}
 {% block content %}
 
 <div class="container-fluid movies">
@@ -9,21 +6,39 @@
         <ul class="list-unstyled">
             <li>
                 {% if current_genre %}
-                <a class="all-cat" href="{% url 'movie-review-home' %}" >All</a>
+                <a class="all-cat" href="{% url 'movie-genre-home' current_genre.name %}" style="color: black;">
+                    {{ current_genre.name }}</a>
                 {% else %}
-                <a class="all-cat active" href="{% url 'movie-review-home' %}"" style="color: black;" >All</a>
+                <a class="all-cat active" href="{% url 'movie-review-home' %}" style="color: black;">All</a>
                 {% endif %}
             </li>
-            {% for category in genres.genres %}
             <li>
-                {% if current_genre == category.id %}
-                <a class="all-cat active" href="{% url 'movie-genre-home' category.id %}" style="color: black;">{{ category.name }}</a>
-                {% else %}
-                <a class="all-cat" href="{% url 'movie-genre-home' category.name %}">{{ category.name }}</a>
-                {% endif %}
+                <a class="all-cat" data-toggle="collapse" href="#categories" role="button" aria-expanded="false"
+                    aria-controls="collapseExample"> Categories</a>
             </li>
-            {% endfor %}
+            <li>
+                <a class="all-cat" href="{% url 'trending' %}">Trending</a>
+            </li>
         </ul>
+        <div class="collapse" id="categories">
+            <div class="card card-body">
+                <ul class="list-unstyled">
+                    <li>
+                        <a class="all-cat active" href="{% url 'movie-review-home' %}">All</a>
+                    </li>
+                    {% for genre in genres.genres %}
+                    <li>
+                        {% if current_genre.id == genre.id %}
+                        <a class="all-cat active" href="{% url 'movie-genre-home' genre.name %}"
+                            style="color: black;">{{ genre.name }}</a>
+                        {% else %}
+                        <a class="all-cat" href="{% url 'movie-genre-home' genre.name %}">{{ genre.name }}</a>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -42,8 +57,8 @@
         </div>
     </div>
     {% if forloop.counter|divisibleby:"4" %}
-    </div>
-    <div class="row movie-cards">
+</div>
+<div class="row movie-cards">
     {% endif %}
     {% endfor %}
 </div>
