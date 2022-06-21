@@ -9,38 +9,32 @@
     <div class="row categories">
         <ul class="list-unstyled">
             <li>
-                <a class="all-cat badge badge-pill badge-light" href="{% url 'movie-review-home' %}"
-                    {% if genre_id == 0%}
-                     style="color:black"
-                    {% endif %}
-                >All</a>
+                <a class="all-cat active" href="#" style="color: black;">All</a>
             </li>
-            
-            {% for genre in genres.genres %}
             <li>
-                <a class="all-cat badge badge-pill badge-light" href="{% url 'movie-review-genre' genre.id %}"
-                    {% if genre_id == genre.id%}
-                     style="color:black"
-                    {% endif %}
-                >{{genre.name}}</a>
-                
+                <a class="all-cat" href="#">Drama</a>
             </li>
-            {% endfor %}
+            <li>
+                <a class="all-cat" href="#">Comedy</a>
+            </li>
+            <li>
+                <a class="all-cat" href="#">Sci-Fi</a>
+            </li>
         </ul>
     </div>
 </div>
 <div class="row movie-cards">
-    {% for movie in result.results %}
+    {% for movie in results %}
     <div class="col-md-3 mov-col">
         <div class="card">
-            <a href="{% url 'movie-review-info' movie.id %}" >
+            <a href="{% url 'movie-review-info' %}">
                 <img class="image-cap-top" src="https://image.tmdb.org/t/p/original/{{ movie.backdrop_path }}"
                     alt="{{ movie.title }}">
             </a>
         </div>
         <div class="support-text" style="margin: 5px;">
             <span class="title pull-left"> {{ movie.title }} </span>
-            <span class="rating pull-right"> <i class="fa fa-star yellow" style="font-size: 15px"></i> {{ movie.vote_average }}</span>
+            <span class="rating pull-right"> <i class="fa fa-star yellow"></i> {{ movie.vote_average }}</span>
         </div>
     </div>
     {% if forloop.counter|divisibleby:"4" %}
@@ -60,14 +54,14 @@
 {% if page_obj.number == num %}
 <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
 {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a class="btn btn-outline-info mb-4"
-href="?page={{ num }}">{{ num }}</a>
-{% endif %}
-{% endfor %}
+    href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+    {% endfor %}
 
-{% if page_obj.has_next %}
-<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
-<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-{% endif %}
+    {% if page_obj.has_next %}
+    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
 
-{% endif %}
+    {% endif %}
 {%endblock%}

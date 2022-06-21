@@ -1,9 +1,9 @@
 from django.urls import path
+
 from . import views
 
 urlpatterns=[
     path('', views.home, name='movie-review-home'),
-    path('trending/', views.trending, name='trending'),
-    path('genre/<str:genre_name>/', views.genre, name='movie-genre-home'),
-    path('movie/<int:id>/', views.info, name='movie-review-info')
+    path('info/<int:id>', views.info, name='movie-review-info'),
+    path('genre/<int:id>', views.genre, name='movie-review-genre'),
 ]
