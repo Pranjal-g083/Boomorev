@@ -35,40 +35,52 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <div class="wrapper mr-auto">
-                <div class="input-holder d-sm-flex ">
-                    <input class="form-control" type="text" id="search" placeholder="search...">
-                    <button id="sch" class="btn btn-primary fa fa-search" type="submit"></button>
+            <div class="row">
+                <a class="nav-link ml-5" href="{% url 'movie-review-home'%} " style="text-align:center;"><i
+                        class="fa fa-home fa-2x"></i></a>
+                <a class="nav-link mr-2" href="javascript:history.go(1)" style="text-align:center;"><i
+                        class="fa fa-angle-left fa-2x"></i></a>
+
+                <div class="wrapper mr-auto">
+                    <div class="input-holder d-sm-flex ">
+                        <input class="form-control" type="text" id="search" placeholder="search...">
+                        <button id="sch" class="btn btn-primary fa fa-search" type="submit"></button>
+                    </div>
                 </div>
             </div>
-            <a class="navbar-brand" href="{% url 'movie-review-home'%}">
-                <div class="row">
-                    <h2 style="font-family: Pacifico, cursive;">MovRev</h2>
-                    <img id="logo" src="{% static 'MovieReview/images/logo.png' %}" alt="logo" class="logo">
-                </div>
-            </a>
-            <ul class="navbar-nav ml-auto">
-                <div class="container">
-                    <input type="checkbox" id="theme-toggle">
-                    <label for="theme-toggle"></label>
-                </div>
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'profile'%}">Profile</a>
-                </li>
 
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login'%}">Login </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'register'%}">Register</a>
-                </li>
-                {% endif %}
-            </ul>
+        </div>
+
+        <a class="navbar-brand" href="{% url 'movie-review-home'%}">
+            <div class="row">
+                <h2 style="font-family: Pacifico, cursive;">MovRev</h2>
+                <img id="logo" src="{% static 'MovieReview/images/logo.png' %}" alt="logo" class="logo">
+            </div>
+        </a>
+
+
+        <ul class="navbar-nav ml-auto">
+            <div class="container">
+                <input type="checkbox" id="theme-toggle">
+                <label for="theme-toggle"></label>
+            </div>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile'%}">Profile</a>
+            </li>
+
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login'%}">Login </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'register'%}">Register</a>
+            </li>
+            {% endif %}
+        </ul>
         </div>
     </nav>
 
