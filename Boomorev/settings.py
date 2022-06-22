@@ -85,6 +85,15 @@ DATABASES = {
     }
 }
 
+CKEDITOR_CONFIGS = {
+    'default': {
+        # 'toolbar': 'custom',
+        'height': 300,
+        'width': 800,
+        'skin': 'moono',
+        
+    },
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
