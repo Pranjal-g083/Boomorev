@@ -1,17 +1,7 @@
-asgiref @ file:///tmp/build/80754af9/asgiref_1625643473416/work
-certifi==2021.10.8
-Django @ file:///tmp/build/80754af9/django_1625585912945/work
-django-ckeditor==6.4.1
+asgiref==3.5.2
+Django==4.0.5
+django-ckeditor==6.4.2
 django-crispy-forms==1.14.0
 django-js-asset==2.0.0
-numpy==1.22.2
-pandas==1.4.1
-Pillow==9.1.0
-psycopg2 @ file:///C:/ci/psycopg2_1612298766762/work
-python-dateutil==2.8.2
-pytz==2021.3
-six==1.16.0
-sqlparse @ file:///tmp/build/80754af9/sqlparse_1602184451250/work
-tmdb3==0.7.2
-typing-extensions @ file:///tmp/build/80754af9/typing_extensions_1631814937681/work
-wincertstore==0.2
+Pillow==9.1.1
+sqlparse==0.4.2
