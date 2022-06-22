@@ -59,7 +59,7 @@
                                 <h5 class="">Genre</h5>
                                 <p>
                                     {% for genre in movie.genres %}
-                                    <a href="{% url 'movie-genre-home' genre.name %}" style="color: black;">
+                                    <a href="{% url 'movie-genre-home' genre.name %}">
                                         {{ genre.name }}</a> /
                                     {% endfor %}
                                 </p>
