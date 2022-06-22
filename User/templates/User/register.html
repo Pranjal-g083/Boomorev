@@ -1,14 +1,19 @@
 {% extends "MovieReview/base.html" %}
 {% load crispy_forms_tags%}
 {% block content %}
-    <div class='container'>
-        <form method="POST" >
+<div class="container-fluid">
+    <div class="card register">
+        <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="control-label">Please Signin/Signup</legend>
-                {{ form|crispy }}
-                <div class="form-group">
-                    <button class="btn btn btn-primary" type="submit">Signup</button> 
+                <div class="row-categories">
+                    <legend class="control-label"> Please Register Below </legend>
+                </div>
+                <div class="container">
+                    {{ form|crispy }}
+                    <div class="form-group">
+                        <button class="btn btn btn-primary" type="submit">Signup</button>
+                    </div>
                 </div>
             </fieldset>
         </form>
@@ -16,5 +21,6 @@
             <a class="ml-2" href="{% url 'login' %}">Already have an account?</a>
         </div>
     </div>
+</div>
 
 {% endblock content %}
