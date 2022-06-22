@@ -13,7 +13,8 @@ body {
     margin-left: auto;
     margin-right: auto;
     align-items: center;
-    padding-bottom: 10px;
+    padding-bottom: 1em;
+    padding-top: 1em;
 }
 
 .register{
@@ -24,6 +25,8 @@ body {
     margin-bottom: 1em;
     margin-left: auto;
     margin-right: auto;
+    padding-top: 1em;
+    padding-bottom: 1em;
 }
 
 .logo{
