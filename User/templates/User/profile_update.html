@@ -3,21 +3,21 @@
 {% block content %}
 <div class="container-fluid">
     <div class="card register" style="max-width:900px;">
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <div class="categories ml-0">
-                <legend class="control-label">Profile Info</legend>
-            </div>
-            {{ u_form|crispy }}
-            {{ p_form.media }}
-            
-            {{ p_form|crispy }}
-            <div class="form-group">
-                <button class="btn btn btn-primary" type="submit">Update</button> 
-            </div>
-        </fieldset>
-    </form>
-</div>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <div class="categories ml-0">
+                    <legend class="control-label">Profile Info</legend>
+                </div>
+                {{ u_form|crispy }}
+                {{ p_form.media }}
+
+                {{ p_form|crispy }}
+                <div class="form-group">
+                    <button class="btn btn btn-primary" type="submit">Update</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
 </div>
 {% endblock content %}
