@@ -1,0 +1,112 @@
+{% extends "MovieReview/base.html" %}
+{% block content %}
+
+<div class="container-fluid profile">
+    <div class="accordion" id="tabs">
+        <div class="row categories ">
+            <h1 class="name col-md-3">{{ movie.title }}</h1>
+            <ul class="list-unstyled col-md-9">
+                <li>
+                    <a class="all-cat active" data-toggle="collapse" href="#details" id="heading_details"
+                        data-target="#details" aria-expanded="false" aria-controls="details">Details</a>
+                </li>
+                <li>
+                    <a class="all-cat" data-toggle="collapse" href="#trailer" id="heading_trailer"
+                        data-target="#trailer" aria-expanded="false" aria-controls="trailer">Trailer</a>
+                </li>
+                <li>
+                    <a class="all-cat" data-toggle="collapse" href="Recommendation" id="heading_recommendation"
+                        data-target="#recommendation" aria-expanded="false"
+                        aria-controls="recommendation">Recommendations</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <div class="card">
+                    <img class="image-cap-top" src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}"
+                        alt="{{ movie.title }}">
+                </div>
+                <br>
+            </div>
+            <div class=" col-md-7 ">
+                <div id="trailer" class="collapse" aria-labelledby="trailer" data-parent="#tabs">
+                    <div class="container-fluid">
+                        <div class="container">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="{{ trailer }}" frameborder="0"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div id="details" class="collapse show card" aria-labelledby="details" data-parent="#tabs">
+                    <div class="container">
+                        <br>
+                        <p>
+                            {{ movie.overview }}
+                        </p>
+                        <ul class="list-unstyled ">
+                            <li class="rep">
+                                <h5 class="">Imdb Rating</h5>
+                                <p><i class="fa fa-star yellow"></i> {{movie.vote_average}}/10</p>
+                            </li>
+                            <li class="rep">
+                                <h5 class="">Genre</h5>
+                                <p>
+                                    {% for genre in movie.genres %}
+                                    <a href="{% url 'movie-genre-home' genre.name %}">
+                                        {{ genre.name }}</a> /
+                                    {% endfor %}
+                                </p>
+                            </li>
+                            <li class="rep">
+                                <h5 class="">Release Date</h5>
+                                <p id="release_date">{{ movie.release_date }}</p>
+                                <script>
+                                    document.getElementById("release_date").innerHTML = new Date(document.getElementById("release_date").innerHTML).toLocaleDateString('en-us', { year: "numeric", month: "short", day: "numeric" });
+                                </script>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div id="recommendation" class="collapse" aria-labelledby="recommendation" data-parent="#tabs">
+                        <div class="row movie-cards">
+                            {% for recommendation in recommendations.results %}
+                            {% if forloop.counter < 7 %} <div class="col-md-4 mov-col">
+                                <div class="card">
+                                    <a href="{% url 'movie-review-info' recommendation.id %}">
+                                        <img class="image-cap-top"
+                                            src="https://image.tmdb.org/t/p/original/{{ recommendation.backdrop_path }}"
+                                            alt="{{ recommendation.title }}">
+                                    </a>
+                                </div>
+                                <div class="support-text" style="margin: 5px;">
+                                    <span class="pull-left"> {{ recommendation.title }} </span>
+                                </div>
+                        </div>
+                        {% if forloop.counter == 3 %}
+                    </div>
+                    <div class="row movie-cards">
+                        {% endif %}
+
+
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<br>
+<br>
+
+{% endblock %}

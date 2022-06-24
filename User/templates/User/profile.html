@@ -1,0 +1,11 @@
+{% extends "MovieReview/base.html" %}
+{% load crispy_forms_tags%}
+{% block content %}
+<div class="container-fluid"> 
+    <h1> {{ user.username }}'s Profile </h1>
+    {% comment %} <p> {{ user.profile.image.url }} </p> {% endcomment %}
+    {% comment %} <img src="{{ user.profile.image.url }}" alt="default.jpg"></img> {% endcomment %}
+    <h4> {{ user.email }} </h4>
+    <p> {{ user.profile.bio|safe }} </p>
+</div>
+{% endblock content %}

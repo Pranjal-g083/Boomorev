@@ -1,0 +1,85 @@
+{% extends "MovieReview/base.html" %}
+{% block content %}
+
+<div class="container-fluid movies">
+    <div class="row categories">
+        <ul class="list-unstyled">
+            <li>
+                {% if current_genre %}
+                <a class="all-cat active" href="{% url 'movie-genre-home' current_genre.name %}" >
+                    {{ current_genre.name }}</a>
+                {% else %}
+                <a class="all-cat active" href="{% url 'movie-review-home' %}" >All</a>
+                {% endif %}
+            </li>
+            <li>
+                <a class="all-cat" data-toggle="collapse" href="#categories" role="button" aria-expanded="false"
+                    aria-controls="collapseExample"> Categories</a>
+            </li>
+            <li>
+                <a class="all-cat" href="{% url 'trending' %}">Trending</a>
+            </li>
+        </ul>
+        <div class="collapse" id="categories">
+            <div class="card card-body">
+                <ul class="list-unstyled">
+                    <li>
+                        <a class="all-cat active" href="{% url 'movie-review-home' %}">All</a>
+                    </li>
+                    {% for genre in genres.genres %}
+                    <li>
+                        {% if current_genre.id == genre.id %}
+                        <a class="all-cat active" href="{% url 'movie-genre-home' genre.name %}">{{ genre.name }}</a>
+                        {% else %}
+                        <a class="all-cat" href="{% url 'movie-genre-home' genre.name %}">{{ genre.name }}</a>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row movie-cards">
+    {% for movie in movies %}
+    <div class="col-md-3 mov-col">
+        <div class="card">
+            <a href="{% url 'movie-review-info' movie.id %}">
+                <img class="image-cap-top" src="https://image.tmdb.org/t/p/original/{{ movie.backdrop_path }}"
+                    alt="{{ movie.title }}">
+            </a>
+        </div>
+        <div class="support-text" style="margin: 5px;">
+            <span class="title pull-left"> {{ movie.title }} </span>
+            <span class="rating pull-right"> <i class="fa fa-star yellow"></i> {{ movie.vote_average }}</span>
+        </div>
+    </div>
+    {% if forloop.counter|divisibleby:"4" %}
+</div>
+<div class="row movie-cards">
+    {% endif %}
+    {% endfor %}
+</div>
+{% if is_paginated %}
+
+{% if page_obj.has_previous %}
+<a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+{% endif %}
+
+{% for num in page_obj.paginator.page_range %}
+{% if page_obj.number == num %}
+<a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+{% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a class="btn btn-outline-info mb-4"
+    href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+
+    {% endif %}
+    {%endblock%}
