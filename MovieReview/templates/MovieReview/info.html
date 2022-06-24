@@ -157,21 +157,34 @@
         </div>
     </div>
 </div>
+<br>
+<br>
 <div class="container-fluid">
-    <div class="card card-body">
-        <div class="categories">
-            <h2>Comments...</h2>
-        </div>
-        <div class=" container">
-            <form method="POST">
-                {% csrf_token %}
-                {{ comment_add_form | crispy }}
-                <input type="submit" name="comment_add_form" value="Add Comment">
-            </form>
+    <div class="container">
+        <a class=" btn btn-outline-info" data-toggle="collapse" href="#write_comment" role="button"
+            aria-expanded="false" aria-controls="comment_write_area">
+            Add Comment!
+        </a>
+        <br>
+        <div class="collapse" id="write_comment">
+
+            <div class="card card-body">
+                <div class=" container-fluid">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <textarea class="form-control " name="comment"
+                            placeholder="Comment here !" required="" id="id_comment"></textarea>
+                        <span style="float: right">
+                            <input class="btn btn-outline-success" type="submit" name="comment_add_form" value="Save">
+                        </span>
+                    </form>
+                </div>
+
+            </div>
         </div>
 
-    </div>
-    <div class="container">
+
+
         <div class="comment-widgets m-b-20">
 
 
@@ -262,7 +275,7 @@
                                     {% csrf_token %}
                                     {{ comment_edit_form | crispy }}
                                     <input type="hidden" name="object_id" value="{{ comment.id }}">
-                                    <input type="submit" name="comment_edit_form" value="Edit Comment">
+                                    <input type="submit" class="btn btn-outline-warning" name="comment_edit_form" value="Edit Comment">
                                 </form>
                             </div>
                             <ul class="list-inline d-sm-flex my-0">
@@ -272,7 +285,7 @@
                                         {% csrf_token %}
                                         <input type="hidden" name="object_id" value="{{ comment.id }}">
                                         <button type="submit" name="comment_upvote_form">
-                                            <i class="fa fa-thumbs-up fa-2xs g-pos-rel g-top-1 g-mr-3"></i>
+                                            <i class="fa fa-thumbs-up g-pos-rel g-top-1 g-mr-3"></i>
                                         </button>
                                     </form>
                                 </li>

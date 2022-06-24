@@ -26,6 +26,19 @@ body[theme="dark"] .nav-link,
     font-weight: bold;
 }
 
+
+body[theme="dark"] textarea
+{
+    background: #112031 !important;
+    color: #D4ECDD;
+    border: none;
+    /* border-bottom: solid 2px #D4ECDD; */
+    border-radius: 0.5em;
+    padding: 0.5em;
+    transition: background 0.2s linear;
+    margin-bottom: 0.2em;
+    border: solid 0.1em cyan;
+}
 body[theme="dark"] .input-holder {
     background: rgba(#112031, 0.5);
     border-bottom: solid 2px white;

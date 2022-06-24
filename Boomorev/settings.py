@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'User.apps.UserConfig',
     'crispy_forms',
+    'widget_tweaks',
     
 ]
 
