@@ -16,6 +16,12 @@
     transition: all 0.3s ease-in-out;
 }
 
+.action-icons a.trash:hover
+{
+    color:red;
+    background-color: red;
+}
+
 .card>a>img {
     position: relative;
     margin: auto;
