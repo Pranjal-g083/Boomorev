@@ -211,9 +211,8 @@
                                     <a href="#" data-abc="true" data-toggle="collapse"
                                         data-target="#my_comment_edit_{{comment.id}}" role="button"
                                         aria-controls="my_comment_edit_{{comment.id}}"><i
-                                            class="fa fa-pencil fa-lg"></i></a>
-                                    {%endif%}
-                                    {% if comment.commented_by == request.user %}
+                                            class="fa fa-pencil trash fa-lg"></i></a>
+
                                     <a href="#" data-abc="true" data-toggle="modal"
                                         data-target="#my_comment_{{comment.id}}" role="button"><i
                                             class="fa fa-trash-o fa-lg "></i></a>
@@ -297,7 +296,7 @@
                                             </button>
                                         </form>
                                     </li>
-                                    <li class="mt-auto mb-auto"">{{comment.downvote.count}}</li>
+                                    <li class="mt-auto mb-auto">{{comment.downvote.count}}</li>
                                     <li class=" mt-auto mr-auto mb-2 ml-3">
                                         {% if comment.commented_by == request.user %}
                                         <a href=" #" data-abc="true">
@@ -340,20 +339,24 @@
                                         <div class="p-2"><span class="round"><img src="{{reply.user.profile.image.url}}"
                                                     alt="user" width="50"></span></div>
                                         <div class="comment-text w-100">
-                                            <div class="h5 mb-0">{{reply.user.username}}</div>
+                                            <div class="row">
+                                                <div class="h5 mb-0 ml-3">{{reply.user.username}}</div>
+                                                <span class="date ml-auto mr-2">
+                                                    <p class="text-muted">{{reply.added_on}}</p>
+                                                </span>
+                                            </div>
                                             <div class="mt-0 mb-2">
-                                                <span class="date">{{reply.added_on}}</span>
+
                                                 <span class="action-icons float-right">
                                                     {% if reply.user == request.user %}
                                                     <a href="#" data-abc="true" data-toggle="collapse"
                                                         data-target="#my_reply_edit_{{reply.id}}" role="button"
                                                         aria-controls="my_reply_edit_{{comment.id}}"><i
-                                                            class="fa fa-pencil"></i></a>
-                                                    {%endif%}
-                                                    {% if reply.user == request.user %}
-                                                    <a href="#" data-abc="true" class="trash" data-toggle="modal"
-                                                        data-target="#my_comment_{{reply.id}}" role="button"><i 
-                                                            class="fa fa-trash"></i></a>
+                                                            class="fa fa-pencil fa-lg"></i></a>
+
+                                                    <a href="#" data-abc="true" data-toggle="modal"
+                                                        data-target="#my_comment_{{reply.id}}" role="button"><i
+                                                            class="fa fa-trash-o trash fa-lg"></i></a>
                                                     <div id="my_comment_{{reply.id}}" class="modal fade" tabindex="-1"
                                                         role="dialog" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -404,18 +407,6 @@
                                                         </div>
                                                     </div>
                                                     {%endif%}
-                                                    {% if reply.user == request.user %}
-                                                    <a href="#" data-abc="true">
-                                                        <form method="post">
-                                                            {% csrf_token %}
-                                                            <input type="hidden" name="object_id"
-                                                                value="{{ reply.id }}">
-                                                            <button type="submit" name="reply_like_form">
-                                                                <i class="fa fa-heart g-pos-rel g-top-1 g-mr-3"></i>
-                                                            </button>
-                                                        </form>
-                                                    </a>
-                                                    {%endif%}
                                                 </span>
                                             </div>
                                             <div>
@@ -428,30 +419,57 @@
                                                     <input type="hidden" name="object_id" value="{{ reply.id }}">
                                                     <input type="submit" name="reply_edit_form" value="Edit">
                                                 </form>
+
+
+
                                             </div>
+
+
                                             <ul class="list-inline d-sm-flex my-0">
-                                                {% if reply.user == request.user %}
-                                                <li class="list-inline-item g-mr-20">
-                                                    <form method="post">
-                                                        {% csrf_token %}
-                                                        <input type="hidden" name="object_id" value="{{ reply.id }}">
-                                                        <button type="submit" name="reply_upvote_form">
-                                                            <i class="fa fa-thumbs-up g-pos-rel g-top-1 g-mr-3"></i>
-                                                        </button>
-                                                    </form>
-                                                </li>
-                                                <li class="mr-2">{{reply.upvote.count}}</li>
-                                                <li class="list-inline-item g-mr-20">
-                                                    <form method="post">
-                                                        {% csrf_token %}
-                                                        <input type="hidden" name="object_id" value="{{ reply.id }}">
-                                                        <button type="submit" name="reply_downvote_form">
-                                                            <i class="fa fa-thumbs-down g-pos-rel g-top-1 g-mr-3"></i>
-                                                        </button>
-                                                    </form>
-                                                </li>
-                                                <li>{{reply.downvote.count}}</li>
-                                                {%endif%}
+                                                <div class="row">
+                                                    <li class="list-inline-item g-mr-20">
+                                                        <form method="post">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="object_id"
+                                                                value="{{ reply.id }}">
+                                                            <button type="submit" name="reply_upvote_form">
+                                                                <i
+                                                                    class="fa fa-caret-up fa-sm g-pos-rel g-top-1 g-mr-3"></i>
+                                                            </button>
+                                                        </form>
+                                                    </li>
+                                                    <li class="mr-2 mt-auto mb-auto">{{reply.upvote.count}}</li>
+                                                    <li class="list-inline-item g-mr-20">
+                                                        <form method="post">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="object_id"
+                                                                value="{{ reply.id }}">
+                                                            <button type="submit" name="reply_downvote_form">
+                                                                <i
+                                                                    class="fa fa-caret-down g-pos-rel g-top-1 g-mr-3"></i>
+                                                            </button>
+                                                        </form>
+                                                    </li>
+                                                    <li class="mt-auto mb-auto">{{reply.downvote.count}}</li>
+                                                    <li class=" mt-auto mr-auto mb-2 ml-3">
+                                                        {% if comment.commented_by == request.user %}
+                                                        <a href="#" data-abc="true">
+                                                            <form method="post">
+                                                                {% csrf_token %}
+                                                                <input type="hidden" name="object_id"
+                                                                    value="{{ reply.id }}">
+                                                                <button style="border: 0;"
+                                                                    class=" btn-outline-danger btn-sm" type="submit"
+                                                                    name="reply_like_form">
+                                                                    <i
+                                                                        class="fa fa-heart-o g-pos-rel fa-lg g-top-1"></i>
+                                                                </button>
+                                                            </form>
+                                                        </a>
+                                                        {%endif%}
+                                                    </li>
+                                                </div>
+
                                             </ul>
                                         </div>
                                     </div>

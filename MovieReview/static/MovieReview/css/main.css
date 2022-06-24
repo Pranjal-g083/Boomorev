@@ -16,10 +16,9 @@
     transition: all 0.3s ease-in-out;
 }
 
-.action-icons a.trash:hover
+a.trash:hover
 {
-    color:red;
-    background-color: red;
+    color:red !important;
 }
 
 .card>a>img {

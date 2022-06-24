@@ -12,7 +12,7 @@ body[theme="dark"] {
     box-shadow: inset -0.45em -0.45em 0.025em 0.025em #fff;
 }
 
-body[theme="dark"] .logo{
+body[theme="dark"] .logo {
     max-height: 2em;
     max-width: 2em;
     margin-left: 1em;
@@ -26,11 +26,31 @@ body[theme="dark"] .nav-link,
     font-weight: bold;
 }
 
+body[theme="dark"] textarea::-webkit-input-placeholder {
+    color: lightgrey;
+}
 
-body[theme="dark"] textarea
-{
+body[theme="dark"] textarea:-moz-placeholder {
+    /* Firefox 18- */
+    color: lightgrey;
+}
+
+body[theme="dark"] textarea::-moz-placeholder {
+    /* Firefox 19+ */
+    color: lightgrey;
+}
+
+body[theme="dark"] textarea:-ms-input-placeholder {
+    color: lightgrey;
+}
+
+body[theme="dark"] textarea::placeholder {
+    color: lightgrey;
+}
+
+body[theme="dark"] textarea {
     background: #112031 !important;
-    color: #D4ECDD;
+    color: white !important;
     border: none;
     /* border-bottom: solid 2px #D4ECDD; */
     border-radius: 0.5em;
@@ -39,6 +59,7 @@ body[theme="dark"] textarea
     margin-bottom: 0.2em;
     border: solid 0.1em cyan;
 }
+
 body[theme="dark"] .input-holder {
     background: rgba(#112031, 0.5);
     border-bottom: solid 2px white;

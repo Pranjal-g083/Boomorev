@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.urls import reverse
 import json
 from urllib.request import urlopen
-from .forms import CommentForm, ReplyForm, CommentEditForm, ReplyEditForm
+from .forms import ReplyForm, CommentEditForm, ReplyEditForm
 from .models import Comment, Reply, Likes, Upvote, Downvote, UserRating
 
 
@@ -87,14 +87,11 @@ def info(request, id):
 
     if request.method == 'POST':
         if 'comment_add_form' in request.POST:
-            comment_add_form = CommentForm(request.POST)
             if(request.user.is_authenticated):
-                if(comment_add_form.is_valid()):
-                    obj = comment_add_form.save(commit=False)
-                    obj.movieid = id
-                    obj.commented_by = request.user
-                    obj.save()
-                    return HttpResponseRedirect(reverse('movie-review-info', args=[id]))
+                obj = comment.objects.create(
+                    movieid=id, commented_by=request.user, comment=request.POST['comment'])
+                obj.save()
+                return HttpResponseRedirect(reverse('movie-review-info', args=[id]))
             else:
                 messages.success(request, f'Please login in first')
                 return redirect('login')
@@ -222,7 +219,7 @@ def info(request, id):
                 messages.success(request, f'Please login in first')
                 return redirect('login')
 
-    comment_add_form = CommentForm()
+    # comment_add_form = CommentForm()
     reply_add_form = ReplyForm()
     comment_edit_form = CommentEditForm()
     reply_edit_form = ReplyEditForm()
@@ -245,7 +242,7 @@ def info(request, id):
              "trailer": trailer[0],
              "title": title,
              "reply_add_form": reply_add_form,
-             "comment_add_form": comment_add_form,
+             #  "comment_add_form": comment_add_form,
              "comment_edit_form": comment_edit_form,
              "reply_edit_form": reply_edit_form,
              "rating": rating,
