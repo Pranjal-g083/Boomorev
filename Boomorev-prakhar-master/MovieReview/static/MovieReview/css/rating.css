@@ -1,0 +1,66 @@
+ .rating-wrapper {
+     align-self: center;
+     box-shadow: .1em .1em 0.3em rgba(198, 206, 237, .7), -.1em -.1em .3em rgba(255, 255, 255, .7), inset 0px 0px 0.05em rgba(255, 255, 255, .9), inset .1em .1em 2em rgba(198, 206, 237, .8);
+     border-radius: 5rem;
+     display: inline-flex;
+     direction: rtl !important;
+     padding: 1.5rem 2.5rem;
+     margin-left: auto;
+ }
+ body[theme="dark"] .rating-wrapper {
+     background-color: #152D35;
+     color: white;
+ }
+
+
+ button {
+     color: rgba(198, 206, 237, .7);
+     display: inline-flex;
+     font-size: 3rem;
+     transition: color 0.5s;
+
+     background: none;
+     border: none;
+     margin: 0;
+     padding: 0;
+     cursor: pointer;
+ }
+
+ button:focus {
+     outline: 0;
+ }
+
+ .selected {
+     color: #34AC9E;
+ }
+ body[theme="dark"] .selected {
+     color: #D4ECDD;
+ }
+
+ .selected_like {
+     color: red
+ }
+ body[theme='dark'] .selected_like {
+     color: #f75a5a;
+ }
+
+
+ button:hover,
+ button:hover~button,
+ input:checked~button {
+     color: #34AC9E;
+ }
+ body[theme="dark"] button:hover, body[theme="dark"] button:hover~button, body[theme="dark"] input:checked~button {
+     color: #D4ECDD;
+ }
+
+ .movie_like:hover {
+     color: red
+ }
+ body[theme="dark"] .movie_like:hover {
+     color: #f75a5a;
+ }
+ .movie_like
+ {
+    font-size: 1em !important;
+ }
