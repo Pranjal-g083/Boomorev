@@ -27,7 +27,7 @@
     {% else %}
     <title>MovRev</title>
     {% endif %}
-
+    <link rel="shortcut icon" type="image/png" href="{% static 'MovieReview/images/video.ico' %}"/>
 </head>
 
 <body theme="">
@@ -48,8 +48,15 @@
 
                 <div class="wrapper mr-auto">
                     <div class="input-holder d-sm-flex ">
-                        <input class="form-control" type="text" id="search" placeholder="search...">
-                        <button id="sch" class="btn btn-primary fa fa-search" type="submit"></button>
+                        <div class = "container">
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class = "row">
+                                <input class="form-control" type="text" id="search" name = "search_name" placeholder="search...">
+                                <button id="sch" class="btn btn-primary fa fa-search" name="search_result_form" type="submit"></button>
+                            </div>
+                        </form>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -109,7 +116,7 @@
                 <ul class="list-inline mb-0">
 
                     <li class="list-inline-item">
-                        <a href="#"> About Us </a>
+                        <a href="{% url 'about-us'%}"> About Us </a>
                     </li>
                     <li class="list-inline-item">
                         <a href="#"> Contact Us </a>
@@ -149,9 +156,8 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
         </script>
     <script src="{% static 'MovieReview/js/main.js' %}"></script>
-        <script>
-            $('body').scrollspy({ target: '#navbar-example' })
-        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.1/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

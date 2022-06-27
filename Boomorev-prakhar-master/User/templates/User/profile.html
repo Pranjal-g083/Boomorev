@@ -1,5 +1,6 @@
     {% extends "MovieReview/base.html" %}
     {% load crispy_forms_tags%}
+    {% load static%}
     {% block content %}
     <div class="container-fluid mb-5 mt-5 profile">
 
@@ -9,10 +10,13 @@
                     
             </div>
 
+
             <div class="col-md-5">
                 <h1 class="name">{{ user.username }}'s Profile</h1>
-                
-                <div class="row categories ">
+            <a href="{% url 'update'%}">
+                <img  src="{% static 'MovieReview/images/user-edit.ico' %}" style="width:20px; height:20px;">
+            </a>
+            <div class="row categories ">
                     <ul class="list-unstyled col-md-9">
                         <li>
                             <a class="all-cat " href="#Bio">Bio</a>
@@ -23,8 +27,8 @@
                     </ul>
                 </div>
                 
-                <div id="Bio" class="card">
-                    <div class="container mb-5">
+                <div id="Bio" > 
+                    <div class=" mb-5" >
                         <br>
                         {{ user.profile.bio|safe }}
                         <ul class="list-unstyled ">
@@ -34,17 +38,7 @@
                             </li>
                         </ul>
                     </div>
-                </div>
-
-
-
-
-
-
-
-
-
-                
+                 </div> 
             </div>
             <div class="col-md-1">
             </div>

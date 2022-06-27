@@ -14,6 +14,12 @@ body[theme="dark"] .comment-area{
     
 }
 
+body[theme="dark"] .overflow{
+    background: #112031 !important;
+    color: #D4ECDD;
+    
+}
+
 #theme-toggle:checked+label {
     background-color: transparent;
     box-shadow: inset -0.45em -0.45em 0.025em 0.025em #fff;

@@ -7,10 +7,14 @@ import json
 from urllib.request import urlopen
 from MovieReview.models import Comment,Reply,UserRating,Likes
 from django.contrib.auth.models import User
+from allauth.account.forms import ResetPasswordForm
+import urllib
 
 api_key = json.load(open("api.json", "r"))
 API_KEY = api_key["key"]
 API_HOST = "https://api.themoviedb.org/3/"
+
+genre_list = json.load(open("genre.json", "r"))
 
 def register(request):
     if request.method== 'POST':
@@ -26,6 +30,17 @@ def register(request):
  
 @login_required
 def profile(request):
+
+    if request.method == 'POST':
+        if "search_result_form" in request.POST:
+            url= API_HOST+"search/movie?api_key="+ API_KEY +'&query=' + urllib.parse.quote_plus(request.POST.get('search_name')) 
+            response = urlopen(url)
+            movies = json.load(response)
+            param = {"movies": movies["results"], "genres": genre_list,
+                    "current_genre": {'name':request.POST.get('search_name')}, "title": request.POST.get('search_name')}
+        
+            return render(request, 'MovieReview/home.html', param)
+
     comments = Comment.objects.filter(commented_by = request.user).order_by('-added_on')
     reply = Reply.objects.filter(user = request.user).order_by('-added_on')
 

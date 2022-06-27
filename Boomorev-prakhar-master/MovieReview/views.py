@@ -5,6 +5,8 @@ from django.contrib import messages
 from django.urls import reverse
 import json
 from urllib.request import urlopen
+
+import urllib.parse
 from .forms import ReplyForm, CommentEditForm, ReplyEditForm
 from .models import Comment, Reply, Likes, Upvote, Downvote, UserRating
 
@@ -27,10 +29,32 @@ def home(request):
     # can add &language=en-US&page=1 to the url to get the english version of the movie
     response = urlopen(url)
     movies = json.load(response)
+    valid_movies = []
 
-    param = {"movies": movies["results"], "genres": genre_list}
+    for movie in movies["results"]:
+        if movie["backdrop_path"]:
+            valid_movies.append(movie)
+        
+
+    if request.method == 'POST':
+        if "search_result_form" in request.POST:
+            url= API_HOST+"search/movie?api_key="+ API_KEY +'&query=' + urllib.parse.quote_plus(request.POST.get('search_name')) 
+            response = urlopen(url)
+            movies = json.load(response)
+            valid_movies = []
+
+            for movie in movies["results"]:
+                if movie["backdrop_path"]:
+                    valid_movies.append(movie)
+                param = {"movies": valid_movies, "genres": genre_list,
+                    "current_genre": {'name':request.POST.get('search_name')}, "title": request.POST.get('search_name')}
+        
+            return render(request, 'MovieReview/home.html', param)
+    param = {"movies": valid_movies, "genres": genre_list}
     return render(request, 'MovieReview/home.html', param)
 
+def about(request):
+    return render(request, 'MovieReview/aboutUs.html');
 
 def genre(request, genre_name):
     context = []
@@ -44,11 +68,37 @@ def genre(request, genre_name):
         str(cur_gen["id"])+"&with_watch_monetization_types=flatrate"
     response = urlopen(url)
     movies = json.load(response)
+    valid_movies = []
 
-    param = {"movies": movies["results"], "genres": genre_list,
+    for movie in movies["results"]:
+        if movie["backdrop_path"]:
+            valid_movies.append(movie)
+    if request.method == 'POST':
+        if "search_result_form" in request.POST:
+            url= API_HOST+"search/movie?api_key="+ API_KEY +'&query=' + urllib.parse.quote_plus(request.POST.get('search_name')) 
+            response = urlopen(url)
+            movies = json.load(response)
+            valid_movies = []
+
+            for movie in movies["results"]:
+                if movie["backdrop_path"]:
+                    valid_movies.append(movie)
+            param = {"movies": valid_movies, "genres": genre_list,
+                    "current_genre": {'name':request.POST.get('search_name')}, "title": request.POST.get('search_name')}
+        
+            return render(request, 'MovieReview/home.html', param)
+    param = {"movies": valid_movies, "genres": genre_list,
              "current_genre": cur_gen, "title": genre_name}
     return render(request, 'MovieReview/home.html', param)
 
+# def search(request,search_name):
+#     url= API_HOST+"search/movie?api_key="+ API_KEY +f"&query={search_name}"
+#     response = urlopen(url)
+#     movies = json.load(response)
+#     param = {"movies": movies["results"], "genres": genre_list,
+#              "current_genre": search_name, "title": search_name}
+    
+#     return render(request, 'MovieSearch/home.html', param)
 
 def info(request, id):
 
@@ -85,6 +135,7 @@ def info(request, id):
     comments = Comment.objects.filter(movieid=str(id)).order_by('-added_on')
 
     if request.method == 'POST':
+
         if 'comment_add_form' in request.POST:
             if(request.user.is_authenticated):
                 obj = Comment.objects.create(
@@ -263,6 +314,21 @@ def info(request, id):
             else:
                 messages.success(request, f'Please login in first')
                 return redirect('login')
+
+        if request.method == 'POST':
+            if "search_result_form" in request.POST:
+                url= API_HOST+"search/movie?api_key="+ API_KEY +'&query=' + urllib.parse.quote_plus(request.POST.get('search_name')) 
+                response = urlopen(url)
+                movies = json.load(response)
+                valid_movies = []
+
+                for movie in movies["results"]:
+                    if movie["backdrop_path"]:
+                        valid_movies.append(movie)
+                param = {"movies": valid_movies, "genres": genre_list,
+                        "current_genre": {'name':request.POST.get('search_name')}, "title": request.POST.get('search_name')}
+            
+                return render(request, 'MovieReview/home.html', param)
 
     # comment_add_form = CommentForm()
     reply_add_form = ReplyForm()

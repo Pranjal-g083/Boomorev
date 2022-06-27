@@ -1,5 +1,7 @@
 {% extends "MovieReview/base.html" %}
 {% load crispy_forms_tags%}
+{% load static %}
+{% load socialaccount %}
 {% block content %}
 <div class='container-fluid'>
     <div class="card login">
@@ -10,15 +12,20 @@
                     <legend class="control-label">Please Sign In</legend>
                 </div>
                 <div class="container">
+                    
                     {{ form|crispy }}
 
-                    <div class="form-group">
-                        <button class="btn btn btn-primary" type="submit">Login</button>
+                    <div class="form-group ml-auto">
+                        <button class="btn btn btn-block btn-primary" type="submit">Login</button>
                     </div>
                 </div>
             </fieldset>
         </form>
-        <div class="border-top pt-3">
+        <hr>
+        <div class="container ">
+            <a class="btn btn-primary btn-block text-white" href="{% provider_login_url "google" %}"><img src="{% static 'MovieReview/images/google.ico' %}" style="width:20px; height:20px;"> Login with Google</a>
+        </div>
+        <div class="pt-3">
             <a class="ml-2" href="{% url 'register' %}">Need an account?</a>
         </div>
     </div>
