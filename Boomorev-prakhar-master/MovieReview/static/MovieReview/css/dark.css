@@ -8,6 +8,19 @@ body[theme="dark"] {
 }
 
 
+
+body[theme="dark"] #img2{
+    height: 30px;
+    width: 30px;
+
+}
+
+body[theme="dark"] #img1{
+    height: 0px;
+    width: 0px;
+
+}
+
 body[theme="dark"] .comment-area{
     background: #112031 !important;
     color: #D4ECDD;

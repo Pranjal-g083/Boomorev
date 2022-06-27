@@ -12,10 +12,19 @@
 
 
             <div class="col-md-5">
-                <h1 class="name">{{ user.username }}'s Profile</h1>
-            <a href="{% url 'update'%}">
-                <img  src="{% static 'MovieReview/images/user-edit.ico' %}" style="width:20px; height:20px;">
-            </a>
+                <div class = "row">
+                <h1 class="name">{{ user.username }}'s Profile  </h1>
+                    <a href="{% url 'update'%}" class="ml-5">
+                        <img class="logo"  src="{% static 'MovieReview/images/user-edit.ico' %}" style="width:40px; height:40px;">
+                    </a>
+                    <a href="{% url 'account_change_password'%}" class="ml-4" >
+                        <img class="logo" src="{% static 'MovieReview/images/password.ico' %}" style="width:40px; height:40px;">
+                    </a>
+
+                    
+                </div>
+              
+
             <div class="row categories ">
                     <ul class="list-unstyled col-md-9">
                         <li>

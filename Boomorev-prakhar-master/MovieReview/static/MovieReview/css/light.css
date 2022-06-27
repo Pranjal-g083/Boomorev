@@ -10,6 +10,24 @@ body {
     background-color: yellow;
 }
 
+
+
+body[theme="light"] #img1{
+    height: 30px;
+    width: 30px;
+    opacity: 100;
+
+}
+
+body[theme="light"] #img2{
+    height: 0px;
+    width: 0px;
+    opacity: 0;
+
+}
+
+
+
 .login{
     max-width: 400px;
     margin-top: 1em;
@@ -141,8 +159,7 @@ body {
 .card {
     border: none;
     width: auto;
-    height: auto;
-    padding: none;
+;
     border-radius: 10px;
     box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
 }
