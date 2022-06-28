@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>MovRev - Trending</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Karla|Raleway' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'MovieReview/css/style.css' %}">
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-fixed-top">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa fa-bars"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-github" style="font-size: 25px;"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-facebook-square" style="font-size: 25px;"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-instagram" style="font-size: 25px;"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link ml-5" href="{% url 'movie-review-home'%} " style="text-align:center;"><i
+                    class="fa fa-home fa-2x"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mr-2" href="javascript:history.go(-1)" style="text-align:center;"><i
+                    class="fa fa-angle-left fa-2x"></i></a>
+                </li>
+            </ul>
+            <a class="navbar-brand" href="{% url 'movie-review-home'%}">
+                <div class="row">
+                    <h2 style="font-family: Pacifico, cursive;">MovRev</h2>
+                    <img id="logo" src="{% static 'MovieReview/images/logo.png' %}" alt="logo" class="logo">
+                </div>
+                
+            </a>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About Us<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'movie-review-home' %}">Reviews</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="slider-container">
+        <div class="slider-content">
+            {% for movie in results %}
+            <div class="slider-single">
+                <img class="slider-single-image" src="https://image.tmdb.org/t/p/original/{{ movie.backdrop_path }}" alt="{{ movie.title }}" />
+                <h1 class="slider-single-title">{{ movie.title }}</h1>
+                <a href="{% url 'movie-review-info' movie.id %}" class="btn btn-primary slider-single-review"> Read Review </a>
+                <a class="slider-single-likes" href="javascript:void(0);">
+                    <i class="fa fa-heart"></i>
+                    <p>{{movie.user_like}}</p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <a class="slider-left" href="javascript:void(0);"><i class="fa fa-arrow-left"></i></a>
+
+        <a class="slider-right" href="javascript:void(0);"><i class="fa fa-arrow-right"></i></a>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+        </script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="{% static 'MovieReview/js/jquery-2.4.1.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+        </script>
+    <script src="{% static 'MovieReview/js/index.js' %}"></script>
+</body>
+
+</html>

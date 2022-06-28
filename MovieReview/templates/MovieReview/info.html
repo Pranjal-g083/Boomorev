@@ -1,0 +1,505 @@
+{% extends "MovieReview/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container-fluid profile">
+    <div class="accordion" id="tabs">
+        <div class="row categories ">
+            <h1 class="name col-md-3">{{ movie.title }}
+                <div class="movie-favourite-btn">
+                    <form method="post">
+                        {% csrf_token %}
+                        {%if movie_like == True %}
+                        <button class="selected_like movie_like" type="submit" name="movie_like_form"><i
+                                class="fa fa-heart d-inline-block"></i></button>
+                        {%else %}
+                        <button class="movie_like" type="submit" name="movie_like_form"><i
+                                class="fa fa-heart"></i></button>
+                        {%endif%}
+                    </form>
+                </div>
+            </h1>
+
+            <ul class="list-unstyled col-md-9">
+                <li>
+                    <a class="all-cat " data-toggle="collapse" href="#details" id="heading_details"
+                        data-target="#details" aria-expanded="false" aria-controls="details">Details</a>
+                </li>
+                <li>
+                    <a class="all-cat" data-toggle="collapse" href="#trailer" id="heading_trailer"
+                        data-target="#trailer" aria-expanded="false" aria-controls="trailer">Trailer</a>
+                </li>
+                <li>
+                    <a class="all-cat" data-toggle="collapse" href="Recommendation" id="heading_recommendation"
+                        data-target="#recommendation" aria-expanded="false"
+                        aria-controls="recommendation">Recommendations</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <div class="card">
+                    <img class="image-cap-top" src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}"
+                        alt="{{ movie.title }}">
+                </div>
+                <br>
+            </div>
+            <div class=" col-md-7 ">
+                <div id="trailer" class="collapse" aria-labelledby="trailer" data-parent="#tabs">
+                    <div class="container-fluid">
+                        <div class="container">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="{{ trailer }}" frameborder="0"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div id="details" class="collapse show card" aria-labelledby="details" data-parent="#tabs">
+                    <div class="container">
+                        <br>
+                        <p>
+                            {{ movie.overview }}
+                        </p>
+                        <ul class="list-unstyled ">
+                            <li class="rep">
+                                <h5 class="">Tmdb Rating</h5>
+                                <p><i class="fa fa-star yellow"></i> {{movie.vote_average}}/10</p>
+                            </li>
+                            <li class="rep">
+                                <h5 class="">MovRev Rating</h5>
+                                <p><i class="fa fa-star yellow"></i> {{average}}</p>
+                            </li>
+                            <li class="rep">
+                                <h5 class="">Genre</h5>
+                                <p>
+                                    {% for genre in movie.genres %}
+                                    <a href="{% url 'movie-genre-home' genre.name %}">
+                                        {{ genre.name }}</a> /
+                                    {% endfor %}
+                                </p>
+                            </li>
+                            <li class="rep">
+                                <h5 class="">Release Date</h5>
+                                <p id="release_date">{{ movie.release_date }}</p>
+                                <script>
+                                    document.getElementById("release_date").innerHTML = new Date(document.getElementById("release_date").innerHTML).toLocaleDateString('en-us', { year: "numeric", month: "short", day: "numeric" });
+                                </script>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div id="recommendation" class="collapse" aria-labelledby="recommendation" data-parent="#tabs">
+                        <div class="row movie-cards">
+                            {% for recommendation in recommendations.results %}
+                            {% if forloop.counter < 7 %} <div class="col-md-4 mov-col">
+                                <div class="card">
+                                    <a href="{% url 'movie-review-info' recommendation.id %}">
+                                        <img class="image-cap-top"
+                                            src="https://image.tmdb.org/t/p/original/{{ recommendation.backdrop_path }}"
+                                            alt="{{ recommendation.title }}">
+                                    </a>
+                                </div>
+                                <div class="support-text" style="margin: 5px;">
+                                    <span class="pull-left"> {{ recommendation.title }} </span>
+                                </div>
+                        </div>
+                        {% if forloop.counter == 3 %}
+                    </div>
+                    <div class="row movie-cards">
+                        {% endif %}
+
+
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+<div class="col-md-12 col-ms-12 ml-auto mr-auto ">
+    <div class="5-star-rating ">
+        <div class="container-wrapper">
+            <div class="container d-flex align-items-center justify-content-center">
+                <div class="row justify-content-center">
+
+                    <!-- star rating -->
+                    <div class="rating-wrapper">
+
+                        <form method="POST">
+                            {% csrf_token %}
+
+                            {% with ''|center:rating5 as range %}
+                            {% for _ in range %}
+                            <button type="submit" name="rating_form" value="{{forloop.revcounter|add:rating}}"><i
+                                    class="fa fa-star fa-sm d-inline-block"></i></button>
+                            {% endfor %}
+                            {% endwith %}
+
+                            {% with ''|center:rating as range %}
+                            {% for _ in range %}
+                            <button class="selected" type="submit" name="rating_form" value="{{forloop.revcounter}}"><i
+                                    class="fa fa-star fa-sm d-inline-block"></i></button>
+                            {% endfor %}
+                            {% endwith %}
+
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<div class="container-fluid">
+    <div class="container">
+        <a class=" btn btn-outline-info" data-toggle="collapse" href="#write_comment" role="button"
+            aria-expanded="false" aria-controls="comment_write_area">
+            Add Comment!
+        </a>
+        <br>
+        <div class="collapse mt-2" id="write_comment">
+
+            <div class="card card-body">
+                <div class=" container-fluid">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <textarea class="form-control " name="comment" placeholder="Comment here !" required=""
+                            id="id_comment"></textarea>
+                        <span class="mt-1" style="float: right">
+                            <input class="btn btn-outline-success" type="submit" name="comment_add_form" value="Save">
+                        </span>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <div class="comment-widgets m-b-20">
+
+
+            {%for comment in comments %}
+            <div class="comment-card">
+                <div class="card">
+                    <div class="d-flex flex-row comment-row">
+
+
+                        <div class="p-2"><span class="round"><img src="{{ comment.commented_by.profile.image.url }}"
+                                    alt="user" width="50"></span></div>
+                        <div class="comment-text w-100">
+                            <div class="row">
+                                <div class="h5 mb-0 ml-3">{{ comment.commented_by.username }}</div>
+                                <span class="date ml-auto mr-2">
+                                    <p class="text-muted">{{ comment.added_on }}</p>
+                                </span>
+                            </div>
+
+                            <div class="mt-0 mb-2">
+
+                                <span class="action-icons float-right">
+                                    {% if comment.commented_by == request.user %}
+                                    <a href="#" data-abc="true" data-toggle="collapse"
+                                        data-target="#my_comment_edit_{{comment.id}}" role="button"
+                                        aria-controls="my_comment_edit_{{comment.id}}"><i
+                                            class="fa fa-pencil trash fa-lg"></i></a>
+
+                                    <a href="#" data-abc="true" data-toggle="modal"
+                                        data-target="#my_comment_{{comment.id}}" role="button"><i
+                                            class="fa fa-trash-o fa-lg "></i></a>
+                                    <div id="my_comment_{{comment.id}}" class="modal fade" tabindex="-1" role="dialog"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content border-0">
+                                                <div class="modal-body p-0">
+                                                    <div class="card border-0 p-sm-3 p-2 justify-content-center">
+                                                        <div class="card-header pb-0 bg-white border-0 ">
+                                                            <div class="row">
+                                                                <div class="col ml-auto"><button type="button"
+                                                                        class="close" data-dismiss="modal"
+                                                                        aria-label="Close"> <span
+                                                                            aria-hidden="true">&times;</span> </button>
+                                                                </div>
+                                                            </div>
+                                                            <p class="font-weight-bold mb-2"> Are you sure you wanna
+                                                                delete
+                                                                this
+                                                                ?
+                                                            </p>
+                                                        </div>
+                                                        <div class="card-body px-sm-4 mb-2 pt-1 pb-0">
+                                                            <div class="row justify-content-end no-gutters">
+                                                                <div class="col-auto">
+                                                                    <button type="button"
+                                                                        class="btn btn-light text-muted"
+                                                                        data-dismiss="modal">Cancel</button>
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <form method="post">
+                                                                        {% csrf_token %}
+                                                                        <input type="hidden" name="object_id"
+                                                                            value="{{ comment.id }}">
+                                                                        <button type="submit" name="comment_delete_form"
+                                                                            class="btn btn-danger px-4">Delete</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {%endif%}
+
+                                </span>
+                            </div>
+                            <div>
+                                <p class="m-b-5 m-t-10">{{comment.comment}}</p>
+                            </div>
+                            <div class="collapse" id="my_comment_edit_{{comment.id}}">
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    {{ comment_edit_form | crispy }}
+                                    <input type="hidden" name="object_id" value="{{ comment.id }}">
+                                    <input type="submit" class="btn btn-outline-warning" name="comment_edit_form"
+                                        value="Edit Comment">
+                                </form>
+                            </div>
+                            <ul class="list-inline d-sm-flex my-0">
+                                <div class="row">
+                                    <li class="list-inline-item g-mr-20">
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="object_id" value="{{ comment.id }}">
+                                            <button type="submit" name="comment_upvote_form">
+                                                <i class="fa fa-caret-up fa-sm g-pos-rel g-top-1 g-mr-3"></i>
+                                            </button>
+                                        </form>
+                                    </li>
+                                    <li class="mr-2 mt-auto mb-auto">{{comment.upvote.count}}</li>
+                                    <li class="list-inline-item g-mr-20">
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="object_id" value="{{ comment.id }}">
+                                            <button type="submit" name="comment_downvote_form">
+                                                <i class="fa fa-caret-down fa-sm g-pos-rel g-top-1 g-mr-3"></i>
+                                            </button>
+                                        </form>
+                                    </li>
+                                    <li class="mt-auto mb-auto">{{comment.downvote.count}}</li>
+                                    <li class=" mt-auto mr-auto mb-2 ml-3">
+                                        <a href=" #" data-abc="true">
+                                            <form method="post">
+                                                {% csrf_token %}
+                                                
+                                                <input type="hidden" name="object_id" value="{{ comment.id }}">
+                                                <button style="border: 0;" 
+                                                    type="submit" name="comment_like_form">
+                                                    {%if comment.like%}
+                                                    <i class="fa fa-heart  g-pos-rel g-top-1 selected_like" style="font-size:0.6em;"></i>
+                                                    {%else%}
+                                                    <i class="fa fa-heart  g-pos-rel g-top-1" style="font-size:0.6em;"></i>
+                                                    {%endif%}
+
+                                                    <!-- {% if like_comment.forloop.counter0 %}
+                                                        <i class="fa fa-heart-o g-pos-rel fa-lg g-top-1"></i>
+                                                    {%else%}
+                                                        <i class="fa fa-caret-down g-pos-rel fa-lg g-top-1"></i>
+                                                    {%endif%} -->
+                                                </button>
+                                                
+                                            </form>
+                                        </a>
+                                    </li>
+                                </div>
+                                <li class=" list-inline-item ml-auto mt-auto mb-1 mr-1">
+                                    <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover "
+                                        data-toggle="collapse" href="#collapse-{{ comment.id }}" role="button"
+                                        aria-expanded="false" aria-controls="collapse-{{ comment.id }}">
+                                        <i class="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>
+                                        Reply
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                            <div id="collapse-{{ comment.id }}"
+                                class="collapse container justify-content-center px-0 mx-0">
+                                <div class="comment-widgets m-b-20">
+
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        {{ reply_add_form | crispy }}
+                                        <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                                        <input type="submit" class="btn btn-info" name="reply_add_form" value="Reply">
+                                    </form>
+
+                                    {% for reply in comment.replies.all %}
+                                    <div class="d-flex flex-row comment-row">
+                                        <div class="p-2"><span class="round"><img src="{{reply.user.profile.image.url}}"
+                                                    alt="user" width="50"></span></div>
+                                        <div class="comment-text w-100">
+                                            <div class="row">
+                                                <div class="h5 mb-0 ml-3">{{reply.user.username}}</div>
+                                                <span class="date ml-auto mr-2">
+                                                    <p class="text-muted">{{reply.added_on}}</p>
+                                                </span>
+                                            </div>
+                                            <div class="mt-0 mb-2">
+
+                                                <span class="action-icons float-right">
+                                                    {% if reply.user == request.user %}
+                                                    <a href="#" data-abc="true" data-toggle="collapse"
+                                                        data-target="#my_reply_edit_{{reply.id}}" role="button"
+                                                        aria-controls="my_reply_edit_{{comment.id}}"><i
+                                                            class="fa fa-pencil fa-lg"></i></a>
+
+                                                    <a href="#" data-abc="true" data-toggle="modal"
+                                                        data-target="#my_comment_{{reply.id}}" role="button"><i
+                                                            class="fa fa-trash-o trash fa-lg"></i></a>
+                                                    <div id="my_comment_{{reply.id}}" class="modal fade" tabindex="-1"
+                                                        role="dialog" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content border-0">
+                                                                <div class="modal-body p-0">
+                                                                    <div
+                                                                        class="card border-0 p-sm-3 p-2 justify-content-center">
+                                                                        <div
+                                                                            class="card-header pb-0 bg-white border-0 ">
+                                                                            <div class="row">
+                                                                                <div class="col ml-auto"><button
+                                                                                        type="button" class="close"
+                                                                                        data-dismiss="modal"
+                                                                                        aria-label="Close"> <span
+                                                                                            aria-hidden="true">&times;</span>
+                                                                                    </button></div>
+                                                                            </div>
+                                                                            <p class="font-weight-bold mb-2"> Are you
+                                                                                sure
+                                                                                you
+                                                                                wanna
+                                                                                delete this ?</p>
+                                                                        </div>
+                                                                        <div class="card-body px-sm-4 mb-2 pt-1 pb-0">
+                                                                            <div
+                                                                                class="row justify-content-end no-gutters">
+                                                                                <div class="col-auto">
+                                                                                    <button type="button"
+                                                                                        class="btn btn-light text-muted"
+                                                                                        data-dismiss="modal">Cancel</button>
+                                                                                </div>
+                                                                                <div class="col-auto">
+                                                                                    <form method="post">
+                                                                                        {% csrf_token %}
+                                                                                        <input type="hidden"
+                                                                                            name="object_id"
+                                                                                            value="{{ reply.id }}">
+                                                                                        <button type="submit"
+                                                                                            name="reply_delete_form"
+                                                                                            class="btn btn-danger px-4">Delete</button>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {%endif%}
+                                                </span>
+                                            </div>
+                                            <div>
+                                                <p class="m-b-5 m-t-10">{{reply.reply}}</p>
+                                            </div>
+                                            <div class="collapse" id="my_reply_edit_{{reply.id}}">
+                                                <form method="POST">
+                                                    {% csrf_token %}
+                                                    {{ reply_edit_form | crispy }}
+                                                    <input type="hidden" name="object_id" value="{{ reply.id }}">
+                                                    <input type="submit" name="reply_edit_form" value="Edit">
+                                                </form>
+
+
+
+                                            </div>
+
+
+                                            <ul class="list-inline d-sm-flex my-0">
+                                                <div class="row">
+                                                    <li class="list-inline-item g-mr-20">
+                                                        <form method="post">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="object_id"
+                                                                value="{{ reply.id }}">
+                                                            <button type="submit" name="reply_upvote_form">
+                                                                <i
+                                                                    class="fa fa-caret-up fa-sm g-pos-rel g-top-1 g-mr-3"></i>
+                                                            </button>
+                                                        </form>
+                                                    </li>
+                                                    <li class="mr-2 mt-auto mb-auto">{{reply.upvote.count}}</li>
+                                                    <li class="list-inline-item g-mr-20">
+                                                        <form method="post">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="object_id"
+                                                                value="{{ reply.id }}">
+                                                            <button type="submit" name="reply_downvote_form">
+                                                                <i
+                                                                    class="fa fa-caret-down g-pos-rel g-top-1 g-mr-3"></i>
+                                                            </button>
+                                                        </form>
+                                                    </li>
+                                                    <li class="mt-auto mb-auto">{{reply.downvote.count}}</li>
+                                                    {% comment %} <li class=" mt-auto mr-auto mb-2 ml-3">
+                                                        <a href="#" data-abc="true">
+                                                            <form method="post">
+                                                                {% csrf_token %}
+                                                                <input type="hidden" name="object_id"
+                                                                    value="{{ reply.id }}">
+                                                                <button style="border: 0;"
+                                                                     type="submit"
+                                                                    name="reply_like_form">
+                                                                    {{reply.like}}
+                            
+                                                                </button>
+                                                            </form>
+                                                        </a>
+                                                    </li> {% endcomment %}
+                                                </div>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+</div>
+</div>
+<br>
+<br>
+
+{% endblock %}

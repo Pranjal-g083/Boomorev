@@ -1,0 +1,200 @@
+/* Dark Mode */
+/* -------------------------------------------------- */
+body[theme="dark"] {
+    background: #112031;
+    font-family: 'Raleway';
+    color: #D4ECDD;
+    transition: background 0.2s linear;
+}
+
+
+
+body[theme="dark"] #img2{
+    height: 30px;
+    width: 30px;
+
+}
+
+body[theme="dark"] #img1{
+    height: 0px;
+    width: 0px;
+
+}
+
+body[theme="dark"] .comment-area{
+    background: #112031 !important;
+    color: #D4ECDD;
+    
+}
+
+body[theme="dark"] .overflow-auto{
+    background: #112031 !important;
+    color: #D4ECDD;
+    
+}
+
+#theme-toggle:checked+label {
+    background-color: transparent;
+    /* box-shadow: inset -0.45em -0.45em 0.025em 0.025em #fff; */
+}
+
+body[theme="dark"] .logo {
+    max-height: 2em;
+    max-width: 2em;
+    margin-left: 1em;
+    filter: invert(100%);
+    transition: filter 0.2s linear;
+}
+
+body[theme="dark"] .nav-link,
+.nav-link:hover {
+    color: #D4ECDD;
+    font-weight: bold;
+}
+
+body[theme="dark"] textarea::-webkit-input-placeholder {
+    color: lightgrey;
+}
+
+body[theme="dark"] textarea:-moz-placeholder {
+    /* Firefox 18- */
+    color: lightgrey;
+}
+
+body[theme="dark"] textarea::-moz-placeholder {
+    /* Firefox 19+ */
+    color: lightgrey;
+}
+
+body[theme="dark"] textarea:-ms-input-placeholder {
+    color: lightgrey;
+}
+
+body[theme="dark"] textarea::placeholder {
+    color: lightgrey;
+}
+
+body[theme="dark"] textarea {
+    background: #112031 !important;
+    color: white !important;
+    border: none;
+    /* border-bottom: solid 2px #D4ECDD; */
+    border-radius: 0.5em;
+    padding: 0.5em;
+    transition: background 0.2s linear;
+    margin-bottom: 0.2em;
+    border: solid 0.1em cyan;
+}
+
+body[theme="dark"] .input-holder {
+    background: rgba(#112031, 0.5);
+    border-bottom: solid 2px white;
+    color: #D4ECDD;
+    height: 45px;
+    padding: 2px;
+    margin-right: 20px;
+    border-radius: 10px;
+}
+
+body[theme="dark"] #sch {
+    margin: 0;
+    border-radius: 50%;
+    color: white;
+    background: none;
+    border: none;
+}
+
+body[theme="dark"] #sch:hover {
+    color: #D4ECDD;
+    transition: all ease-in-out 0.25s;
+}
+
+body[theme="dark"] #sch:focus {
+    outline: none !important;
+    color: #D4ECDD;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+body[theme="dark"] #search {
+    width: 250px;
+    background: none;
+    border: none;
+    color: white;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+body[theme="dark"] #search:focus {
+    width: 250px;
+    color: #D4ECDD;
+    background: rgba(255, 255, 255, 0);
+}
+
+body[theme="dark"] #search [placeholder="search"] {
+    color: white;
+    font-weight: bold;
+
+}
+
+body[theme="dark"] ::placeholder {
+    color: #D4ECDD;
+    opacity: 1;
+}
+
+
+body[theme="dark"] .categories ul li a {
+    color: lightgrey;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+body[theme="dark"] .categories ul li a:hover {
+    color: white !important;
+    transition: all ease-in-out 0.25s;
+}
+
+body[theme="dark"] .categories ul li a:focus {
+    color: white !important;
+}
+
+body[theme="dark"] .categories ul li a.active {
+    color: white !important;
+}
+
+
+
+body[theme="dark"] .card {
+    background-color: #152D35;
+    border: none;
+    width: auto;
+    height: auto;
+    padding: none;
+    border-radius: 10px;
+    box-shadow: 0px 3px 15px rgba(white, 0.2);
+}
+
+.title,
+.rating {
+    font-size: 15px;
+    font-weight: bold;
+    font-family: 'Lato';
+}
+
+
+body[theme="dark"] footer {
+    position: static;
+    background-color: black;
+    padding: 30px 25px 25px 25px;
+}
+
+body[theme="dark"] footer ul {
+    margin-top: 5px;
+}
+
+body[theme="dark"] footer p a,
+body[theme="dark"] footer h1 a {
+    color: white;
+}
+
+/* -------------------------------------------------- */
