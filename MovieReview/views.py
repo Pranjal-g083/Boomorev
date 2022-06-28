@@ -15,7 +15,6 @@ genre_list = json.load(open("genre.json", "r"))
 api_key = json.load(open("api.json", "r"))
 API_KEY = api_key["key"]
 API_HOST = "https://api.themoviedb.org/3/"
-
 YT_EMBED = "https://www.youtube.com/embed/"
 
 # generates the html for the home page
