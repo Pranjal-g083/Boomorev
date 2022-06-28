@@ -75,9 +75,8 @@
             <div class="container" id="theme-toggler">
                 <input type="checkbox" id="theme-toggle">
                 </input>
-                <label for="theme-toggle">                
-                    <img id="img1" src="{% static 'MovieReview/images/sun.ico' %}">
-                    <img id="img2" src="{% static 'MovieReview/images/moon.ico' %}"></label>
+                <label for="theme-toggle" id="theme-icon">                
+                    <i class="fa fa-sun-o fa-2x" style="color:gold;font-weight:bold"></i></label>
 
             </div>
             {% if user.is_authenticated %}

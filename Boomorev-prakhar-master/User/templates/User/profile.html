@@ -57,8 +57,15 @@
                         <h3>Recent Activities</h3>
                     </div>
                     <div data-spy="scroll" data-offset="0" >
-                        <div class="bg-light border-right min-vh-20 max-vh-50 " id="sidebar-wrapper">
-                            <div class="list-group list-group-flush overflow-auto vh-100">
+                        <div class="border-right " id="sidebar-wrapper">
+                            <div class="list-group list-group-flush overflow-auto" style="max-height:70vh;">
+                                {% if comments.count == 0 %}
+                                <div class="comment-card card py-auto" style="height:5em;">
+                                    <div style="text-align:center;" class="my-auto">
+                                        <h5> No Activities Found</h5>
+                                    </div>
+                                </div>
+                                {%  endif %}
                                 {% for comment in comments%}
                                 <a href="{% url 'movie-review-info' comment.movieid %}"
                                     class="list-group-item list-group-item-action comment-area">

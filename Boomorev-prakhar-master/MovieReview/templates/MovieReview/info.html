@@ -67,8 +67,12 @@
                         </p>
                         <ul class="list-unstyled ">
                             <li class="rep">
-                                <h5 class="">Imdb Rating</h5>
+                                <h5 class="">Tmdb Rating</h5>
                                 <p><i class="fa fa-star yellow"></i> {{movie.vote_average}}/10</p>
+                            </li>
+                            <li class="rep">
+                                <h5 class="">MovRev Rating</h5>
+                                <p><i class="fa fa-star yellow"></i> {{average}}</p>
                             </li>
                             <li class="rep">
                                 <h5 class="">Genre</h5>
@@ -137,14 +141,14 @@
                             {% with ''|center:rating5 as range %}
                             {% for _ in range %}
                             <button type="submit" name="rating_form" value="{{forloop.revcounter|add:rating}}"><i
-                                    class="fa fa-star d-inline-block"></i></button>
+                                    class="fa fa-star fa-sm d-inline-block"></i></button>
                             {% endfor %}
                             {% endwith %}
 
                             {% with ''|center:rating as range %}
                             {% for _ in range %}
                             <button class="selected" type="submit" name="rating_form" value="{{forloop.revcounter}}"><i
-                                    class="fa fa-star d-inline-block"></i></button>
+                                    class="fa fa-star fa-sm d-inline-block"></i></button>
                             {% endfor %}
                             {% endwith %}
 
@@ -301,16 +305,23 @@
                                         <a href=" #" data-abc="true">
                                             <form method="post">
                                                 {% csrf_token %}
+                                                
                                                 <input type="hidden" name="object_id" value="{{ comment.id }}">
-                                                <button style="border: 0;" class=" btn-outline-danger btn-sm"
+                                                <button style="border: 0;" 
                                                     type="submit" name="comment_like_form">
-                                                    <i class="fa fa-heart-o g-pos-rel fa-lg g-top-1"></i>
+                                                    {%if comment.like%}
+                                                    <i class="fa fa-heart  g-pos-rel g-top-1 selected_like" style="font-size:0.6em;"></i>
+                                                    {%else%}
+                                                    <i class="fa fa-heart  g-pos-rel g-top-1" style="font-size:0.6em;"></i>
+                                                    {%endif%}
+
                                                     <!-- {% if like_comment.forloop.counter0 %}
                                                         <i class="fa fa-heart-o g-pos-rel fa-lg g-top-1"></i>
                                                     {%else%}
                                                         <i class="fa fa-caret-down g-pos-rel fa-lg g-top-1"></i>
                                                     {%endif%} -->
                                                 </button>
+                                                
                                             </form>
                                         </a>
                                     </li>
@@ -454,23 +465,21 @@
                                                         </form>
                                                     </li>
                                                     <li class="mt-auto mb-auto">{{reply.downvote.count}}</li>
-                                                    <li class=" mt-auto mr-auto mb-2 ml-3">
+                                                    {% comment %} <li class=" mt-auto mr-auto mb-2 ml-3">
                                                         <a href="#" data-abc="true">
                                                             <form method="post">
                                                                 {% csrf_token %}
                                                                 <input type="hidden" name="object_id"
                                                                     value="{{ reply.id }}">
                                                                 <button style="border: 0;"
-                                                                    class=" btn-outline-danger btn-sm" type="submit"
+                                                                     type="submit"
                                                                     name="reply_like_form">
-                                                                    <i
-                                                                        class="fa fa-heart-o g-pos-rel fa-lg g-top-1"></i>
+                                                                    {{reply.like}}
                             
                                                                 </button>
                                                             </form>
-                                                            {{like_reply.forloop.parentloop.counter0.forloop.counter0}}
                                                         </a>
-                                                    </li>
+                                                    </li> {% endcomment %}
                                                 </div>
 
                                             </ul>

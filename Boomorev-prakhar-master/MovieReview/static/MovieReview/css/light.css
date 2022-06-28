@@ -7,7 +7,7 @@ body {
 }
 
 #theme-toggle:not(:checked)+label {
-    background-color: yellow;
+    background-color: white;
 }
 
 

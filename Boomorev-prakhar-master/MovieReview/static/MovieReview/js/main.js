@@ -4,6 +4,7 @@ if (sessionStorage.getItem("theme") === null) {
 } else {
   if (sessionStorage.getItem("theme") === "dark") {
     document.getElementById("theme-toggle").checked = true;
+    document.getElementById("theme-icon").innerHTML = '<i class="fa fa-moon-o fa-2x"></i>';
   } else {
     document.getElementById("theme-toggle").checked = false;
   }
@@ -11,8 +12,15 @@ if (sessionStorage.getItem("theme") === null) {
 document.body.setAttribute("theme", sessionStorage.getItem("theme"));
 
 document.getElementById("theme-toggle").addEventListener("click", (e) => {
-  sessionStorage.setItem("theme", e.target.checked ? "dark" : "light");
-  document.body.setAttribute("theme", sessionStorage.getItem("theme"));
+  if (e.target.checked) {
+    sessionStorage.setItem("theme", "dark");
+    document.body.setAttribute("theme", "dark");
+    document.getElementById("theme-icon").innerHTML = '<i class="fa fa-moon-o fa-2x"></i>';
+  } else {
+    sessionStorage.setItem("theme", "light");
+    document.body.setAttribute("theme", "light");
+    document.getElementById("theme-icon").innerHTML = '<i class="fa fa-sun-o fa-2x" style="color:gold; font-weight:bold"></i>';
+  }
 });
 
 (function($) {

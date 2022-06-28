@@ -133,6 +133,14 @@ def info(request, id):
     title = movie["title"]
     
     comments = Comment.objects.filter(movieid=str(id)).order_by('-added_on')
+    if request.user.is_authenticated:
+        for comment in comments:
+            
+            chk = Likes.objects.filter(comment=comment, user=request.user)
+            if chk.exists():
+                comment.like=True
+
+        
 
     if request.method == 'POST':
 
@@ -347,28 +355,31 @@ def info(request, id):
         rating = 0
         movie_like = False
 
-    like_comments = []
-    like_replys = []
+    # like_replys = []
 
     if(request.user.is_authenticated):
         for comment in comments:
-            chk = Likes.objects.filter(comment=comment, user=request.user)
-            if chk.exists():
-                like_comments.append('True')
-            else:
-                like_comments.append("False")
 
             replys = Reply.objects.filter(comment=comment,user=request.user)
-            like_reply = []
+            # like_reply = []
             for reply in replys:
                 chk = Likes.objects.filter(comment=comment, user=request.user)
                 if chk.exists():
-                    like_reply.append('True')
+                    reply.like=True
                 else:
-                    like_reply.append("False")
+                    reply.like=False
             
-            like_replys.append(like_reply)
-
+            # like_replys.append(like_reply)
+    user_ratings = UserRating.objects.filter(movieid=id)
+    count = 0;
+    sum = 0;
+    for user_rating in user_ratings:
+        if user_rating.rating != 0:
+            count = count+1
+            sum = sum + user_rating.rating
+    average="No Ratings yet"
+    if count:
+        average = str(round((sum/count)*2,1))+"/10"
     param = {"comments": comments,
              "movie": movie,
              "recommendations": recommendations,
@@ -381,8 +392,7 @@ def info(request, id):
              "rating": rating,
              "rating5": 5 - rating,
              "movie_like": movie_like,
-             "like_comment" : like_comments,
-             "like_reply" : like_replys
+             "average": average,
              }
 
     return render(request, 'MovieReview/info.html', param)
