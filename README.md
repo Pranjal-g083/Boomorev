@@ -163,7 +163,7 @@ This page can be accessed from the top right corner of Movie Details page or hom
 
 This page can be accessed from the top right corner of Movie Details page or home page only if the user is logged in.
 The user can view their profile, edit their profile, and change their password.
-There is a sidebar on the left side that shows the recent comments by the user. And below the user details they can view the list of movies they have favourited.
+There is a sidebar on the right side that shows the recent comments by the user. And below the user details they can view the list of movies they have favourited.
 
 
 ![Profile](assets/profile.png)
