@@ -183,7 +183,15 @@ There is a sidebar on the right side that shows the recent comments by the user.
 pip install -r requirements.txt
 ```
 
-- Step 4: Run the django server. 
+- Step 4: Get an API key from the [TMDb website](https://www.themoviedb.org/documentation/api) and create an `api.json` file in the root directory of the project.
+The file should contain the following information:
+```json
+{
+    "key": "YOUR_API_KEY"
+}
+```
+
+- Step 5: Run the django server. 
 ```bash
 python manage.py runserver
 ```
