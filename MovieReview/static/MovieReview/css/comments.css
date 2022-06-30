@@ -1,0 +1,89 @@
+.card-no-border .card {
+    border: 0px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05)
+}
+
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem
+}
+
+.comment-card {
+    margin-top: 1em;
+    margin-bottom: 1em;
+
+}
+
+/* .comment-card .card
+{
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+} */
+.comment-card .button
+{
+    font-size: 0.5rem !important;
+}
+.comment-widgets .comment-row:hover {
+    background: rgba(0, 0, 0, 0.02);
+    cursor: pointer;
+}
+
+.comment-widgets .comment-row {
+    border-bottom: 1px solid rgba(120, 130, 140, 0.13);
+    padding: 15px;
+}
+.comment-text:hover{
+    visibility: hidden;
+}
+.comment-text:hover{
+    visibility: visible;
+}
+
+.reply_area
+{
+    padding-left: 1em;
+    padding-right: 1em;
+    background-color: cyan;
+    border-radius: 5px;
+    
+}
+
+.label {
+    padding: 3px 10px;
+    line-height: 13px;
+    color: #ffffff;
+    font-weight: 400;
+    border-radius: 4px;
+    font-size: 75%;
+}
+
+.round img {
+    border-radius: 100%;
+}
+
+.label-info {
+    background-color: #1976d2;
+}
+
+.label-success {
+    background-color: green;
+}
+
+.label-danger {
+    background-color: #ef5350;
+}
+
+.action-icons a {
+    padding-left: 7px;
+    vertical-align: middle;
+    color: #99abb4;
+}
+
+.action-icons a:hover {
+    color: #1976d2;
+}

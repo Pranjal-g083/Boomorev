@@ -1,0 +1,159 @@
+    {% extends "MovieReview/base.html" %}
+    {% load crispy_forms_tags%}
+    {% load static%}
+    {% block content %}
+    <div class="container-fluid mb-5 mt-5 profile">
+
+        <div class="row ml-3">
+            <div class="col-md-2"><img class="img-fluid d-block mt-10 mb-5"
+                    style="height:100px; width:100px; border-radius:50px; " src="{{ user.profile.image.url }}">
+                    
+            </div>
+
+
+            <div class="col-md-5">
+                <div class = "row">
+                <h1 class="name">{{ user.username }}'s Profile  </h1>
+                    <a href="{% url 'update'%}" class="ml-5">
+                        <img class="logo"  src="{% static 'MovieReview/images/user-edit.ico' %}" style="width:40px; height:40px;">
+                    </a>
+                    <a href="{% url 'account_change_password'%}" class="ml-4" >
+                        <img class="logo" src="{% static 'MovieReview/images/password.ico' %}" style="width:40px; height:40px;">
+                    </a>
+
+                    
+                </div>
+              
+
+            <div class="row categories ">
+                    <ul class="list-unstyled col-md-9">
+                        <li>
+                            <a class="all-cat " href="#Bio">Bio</a>
+                        </li>
+                        <li>
+                            <a class="all-cat" href="#favourite">favourites</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div id="Bio" > 
+                    <div class=" mb-5" >
+                        <br>
+                        {{ user.profile.bio|safe }}
+                        <br>
+                        <br>
+                        <ul class="list-unstyled ">
+                            <li class="rep">
+                                <h4 class="">Email:</h4>
+                                <p>{{ user.email }}</p>
+                            </li>
+                        </ul>
+                    </div>
+                 </div> 
+            </div>
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="border-radius:10px;">
+                    <div class="categories">
+                        <h3>Recent Activities</h3>
+                    </div>
+                    <div data-spy="scroll" data-offset="0" >
+                        <div class="border-right " id="sidebar-wrapper">
+                            <div class="list-group list-group-flush overflow-auto" style="max-height:70vh;">
+                                {% if comments.count == 0 %}
+                                <div class="comment-card card py-auto" style="height:5em;">
+                                    <div style="text-align:center;" class="my-auto">
+                                        <h5> No Activities Found</h5>
+                                    </div>
+                                </div>
+                                {%  endif %}
+                                {% for comment in comments%}
+                                <a href="{% url 'movie-review-info' comment.movieid %}"
+                                    class="list-group-item list-group-item-action comment-area">
+                                    <div class="comment-card">
+                                        <div class="card">
+                                            <div class="d-flex flex-row comment-row">
+                                                
+
+                                                <div class="h5 mb-auto mt-auto ml-4" style="text-align: left;">
+                                                    {{comment.movie_name}}
+                                                </div>
+                                                <div class="p-2 ml-auto " ><img style="border-radius:5px; width:9em;"
+                                                    src="https://image.tmdb.org/t/p/original/{{ comment.poster }}"
+                                                    alt="user">
+                                                </div>
+                                            </div>
+                                                <div class = "row">
+                                                    <div class="ml-4 md-10 mr-4">
+                                                        <p class="ml-4 mr-auto"
+                                                            style="font-family: serif;  font-size:20px;">
+                                                            {{comment.comment }}
+                                                        </p>
+                                                    </div>
+
+                                                    <ul class="list-inline d-sm-flex mr-4  ml-auto  ">
+                                                        
+
+                                                        <li class="list-inline-item ml-4">
+                                                            <i class="fa fa-caret-up fa-sm "></i>
+                                                        </li>
+                                                        <li class="mr-2  mb-auto">
+                                                            {{comment.upvote.count}}
+                                                        </li>
+                                                        <li class="list-inline-item g-mr-20">
+                                                            <i class="fa fa-caret-down fa-sm"></i>
+                                                        </li>
+                                                        <li class=" mb-auto">
+                                                            {{comment.downvote.count}}
+                                                        </li>
+
+                                                    </ul>
+                            
+                                        </div>
+
+                                        </div>
+                                    </div>
+
+                                </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+
+        <hr style="height: 12px;
+        border: 0;
+        box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);">
+        <div class="container-fluid mt-5">
+            <div id="favourite">
+            <h2 class="categories"> Favourites</h2>
+
+                <div class="row movie-cards">
+                    {% for favourite in movies %}
+                    <div class="col-md-3 mov-col">
+                        <div class="card">
+                            <a href="{% url 'movie-review-info' favourite.id %}">
+                                <img class="image-cap-top"
+                                    src="https://image.tmdb.org/t/p/original/{{ favourite.backdrop_path }}"
+                                    alt="{{ favourite.title }}">
+                            </a>
+                        </div>
+                        <div class="support-text" style="margin: 5px;">
+                            <span class="pull-left"> {{ favourite.title }} </span>
+                        </div>
+                    </div>
+                    {% if forloop.counter|divisibleby:4 %}
+                        </div>
+                        <div class="row movie-cards">
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock content %}
