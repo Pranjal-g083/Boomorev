@@ -32,8 +32,8 @@
 
 ## Description
 
-The website fetches the list of movies from the [TMDb API](https://www.themoviedb.org/documentation/api) and displays it in a no nonsense fashion on the homepage. Various features of this website include movie trailers, recommendation based on the current movie, comments, replies on comments, ratings, favouriting a movie, upvoting or downvoting a comment, search based or category based results, google authentication and email verification.
-There is also a dedicated page for trending movies, which gives a fresh look to the whole project.
+The website fetches the list of movies from the [TMDb API](https://www.themoviedb.org/documentation/api) and displays it in a no nonsense fashion on the homepage. 
+
 
 #### Key Features
 Some key features of the site are:
