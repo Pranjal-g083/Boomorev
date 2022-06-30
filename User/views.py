@@ -14,7 +14,10 @@ api_key = json.load(open("api.json", "r"))
 API_KEY = api_key["key"]
 API_HOST = "https://api.themoviedb.org/3/"
 
-genre_list = json.load(open("genre.json", "r"))
+
+url = API_HOST + "genre/movie/list?api_key=" + API_KEY
+response = urlopen(url)
+genre_list = json.load(response)
 
 def register(request):
     if request.method== 'POST':

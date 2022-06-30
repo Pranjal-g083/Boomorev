@@ -11,7 +11,7 @@ from .forms import ReplyForm, CommentEditForm, ReplyEditForm
 from .models import Comment, Reply, Likes, Upvote, Downvote, UserRating
 
 
-genre_list = json.load(open("genre.json", "r"))
+
 
 # load the api key from a local file since the api key shall not be shared in the code itself for secuirty reasons
 api_key = json.load(open("api.json", "r"))
@@ -19,6 +19,13 @@ API_KEY = api_key["key"]
 API_HOST = "https://api.themoviedb.org/3/"
 
 YT_EMBED = "https://www.youtube.com/embed/"
+
+
+url = API_HOST + "genre/movie/list?api_key=" + API_KEY
+response = urlopen(url)
+genre_list = json.load(response)
+
+
 
 # generates the html for the home page
 
@@ -91,14 +98,6 @@ def genre(request, genre_name):
              "current_genre": cur_gen, "title": genre_name}
     return render(request, 'MovieReview/home.html', param)
 
-# def search(request,search_name):
-#     url= API_HOST+"search/movie?api_key="+ API_KEY +f"&query={search_name}"
-#     response = urlopen(url)
-#     movies = json.load(response)
-#     param = {"movies": movies["results"], "genres": genre_list,
-#              "current_genre": search_name, "title": search_name}
-    
-#     return render(request, 'MovieSearch/home.html', param)
 
 def info(request, id):
 
@@ -399,12 +398,18 @@ def info(request, id):
 
 
 def trending(request):
-    url = API_HOST + "trending/movie/week?api_key=" + API_KEY
+    url = API_HOST + "discover/movie/?api_key=" + API_KEY + "&with_origin_country=IN&sort_by=vote_average.desc&vote_count.gte=70&with_original_language=hi"
     response = urlopen(url)
     movies = json.load(response)
+
+    valid_movies = []
+
+    for movie in movies["results"]:
+        if movie["backdrop_path"]:
+            valid_movies.append(movie)
 
     for movie in movies["results"]:
         like = UserRating.objects.filter(movieid = movie["id"],like=True).count()
         movie["user_like"] = like
 
-    return render(request, 'MovieReview/trending.html', movies)
+    return render(request, 'MovieReview/trending.html', {"results": valid_movies})
