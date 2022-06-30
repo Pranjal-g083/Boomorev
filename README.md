@@ -58,7 +58,7 @@ Some key features of the site are:
 
 ## How To Use
 
-Visit site [here](https://mov-rev.herokuapp.com/). (Note that the website may not be updated to the latest version yet.)
+Visit site [here](https://movrev.pythonanywhere.com/). (Note that the website may not be updated to the latest version yet.)
 or build a local instance of the website using the instructions given [here](#installation). (Recommended for the most recent version)
 
 
