@@ -397,8 +397,8 @@ def info(request, id):
     return render(request, 'MovieReview/info.html', param)
 
 
-def trending(request):
-    url = API_HOST + "discover/movie/?api_key=" + API_KEY + "&with_origin_country=IN&sort_by=vote_average.desc&vote_count.gte=70&with_original_language=hi"
+def india(request):
+    url = API_HOST + "discover/movie/?api_key=" + API_KEY + "&sort_by=vote_average.desc&vote_count.gte=25&with_original_language=hi"
     response = urlopen(url)
     movies = json.load(response)
 
